@@ -20,13 +20,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6-gut-+)a99y$&jkuvq7j940b)q0-gx$9j(x1%4k=s11jjz$59'
+SECRET_KEY = os.environ.get('SECRET_KEY', '6-gut-+)a99y$&jkuvq7j940b)q0-gx$9j(x1%4k=s11jjz$59')
 
+# IMPORTANTE: Esta variable permite saber si estamos en un entorno de desarrollo
+# o en produción
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+CUR_DOMAIN = os.environ.get('CUR_DOMAIN', 'localhost')
+DEBUG = CUR_DOMAIN == 'localhost'
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'arayusb.herokuapp.com',
+    'aray.herokuapp.com',
+    'arayusb.com.ve',
+    'aray.com.ve',
+]
 
 # Application definition
 
@@ -58,7 +67,7 @@ ROOT_URLCONF = 'aray.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,6 +130,15 @@ USE_TZ = True
 # Important for Heroku
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
+
+# Configuraciones de autenticación
+PASSWORD_RESET_TIMEOUT_DAYS = 3
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+# Se cierra la sesion en dos dias: 60 segundos por minuto,
+# 60 minutos por hora, 24 horas por día, 2 días
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 2
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
