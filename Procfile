@@ -1,2 +1,2 @@
 release: python manage.py migrate --no-input
-web: gunicorn mercantilcrm.wsgi
+web: gunicorn aray.wsgi
