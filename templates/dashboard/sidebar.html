@@ -1,0 +1,25 @@
+{% load static %}
+<div class="sidebar-wrapper">
+    <div class="logo">
+        <a href="#" class="simple-text">
+        <img src="{% static 'img/aray-logo.png' %}" width="80" height="80"> 
+        </a>
+    </div>
+
+    <ul class="nav">
+        <li {% if request.resolver_match.url_name == "index" %}class="active"{% endif %}>
+            <a href="{% url 'dashboard:index' %}">
+                <i class="pe-7s-graph"></i>
+                <p>Inicio</p>
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class="pe-7s-map-marker"></i>
+                <p>Mapa de Incidencias</p>
+            </a>
+        </li>
+
+    </ul>
+</div>
