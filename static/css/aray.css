@@ -2925,6 +2925,7 @@ fieldset[disabled] .btn-neutral.active {
     }
     .navbar-fixed-top {
         -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
     }
     #bodyClick {
         height: 100%;
