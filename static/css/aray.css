@@ -3030,3 +3030,7 @@ fieldset[disabled] .btn-neutral.active {
         -webkit-overflow-scrolling: touch;
     }
 }
+
+td.checkbox-cell {
+    width: 10px;
+}
