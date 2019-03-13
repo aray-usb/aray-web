@@ -31,8 +31,7 @@ DEBUG = CUR_DOMAIN == 'localhost'
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'arayusb.herokuapp.com',
-    'aray.herokuapp.com',
+    'aray-usb.herokuapp.com',
     'arayusb.com.ve',
     'aray.com.ve',
 ]
