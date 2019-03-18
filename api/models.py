@@ -155,6 +155,88 @@ class Voluntario(models.Model):
             self.apellido
         )
 
+class Tarea(models.Model):
+    """
+    Representa una tarea asignada a un usuario.
+    """
+
+    titulo = models.CharField(
+        max_length=100,
+        verbose_name="Título"
+    )
+
+    descripcion = models.TextField(
+        default="",
+        verbose_name="Descripción"
+    )
+
+    fecha_limite = models.DateTimeField(
+        verbose_name="Fecha Límite",
+        blank=True,
+        null=True
+    )
+
+    fecha_de_resolucion = models.DateTimeField(
+        verbose_name="Fecha de Resolución",
+        blank=True,
+        null=True
+    )
+
+    # Posibles estados para una tarea
+    ESTADO_NUEVA = 0
+    ESTADO_EN_PROGRESO = 1
+    ESTADO_RESUELTA = 2
+
+    ESTADO_CHOICES = (
+        (ESTADO_NUEVA, "Nueva"),
+        (ESTADO_EN_PROGRESO, "En progreso"),
+        (ESTADO_RESUELTA, "Resuelta")
+    )
+
+    estado = models.IntegerField(
+        choices=ESTADO_CHOICES,
+        default=ESTADO_NUEVA,
+        verbose_name="Estado"
+    )
+
+    asignada_a = models.ForeignKey(
+        Voluntario,
+        on_delete=models.CASCADE,
+        related_name="tareas",
+        verbose_name="Voluntario asignado"
+    )
+
+    asignada_por = models.ForeignKey(
+        Voluntario,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="tareas_que_ha_asignado",
+        verbose_name="Asignada por"
+    )
+
+    def __str__(self):
+        """
+        Retorna una representación como string de la Tarea.
+        """
+
+        return "{0}: {1}".format(
+            self.asignada_a,
+            self.titulo
+        )
+
+    def completar(self):
+        """
+        Marca la tarea como completa y marca la fecha de resolución.
+        """
+
+        if self.estado == Tarea.ESTADO_RESUELTA:
+            return
+
+        self.estado = Tarea.ESTADO_RESUELTA
+        self.fecha_de_resolucion = datetime.now()
+        self.save()
+
 class Incidencia(GeoModelo):
     """
     Representa una incidencia reportada en alguna punto geográfico.
