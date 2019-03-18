@@ -436,3 +436,50 @@ class Recurso(models.Model):
             self.nombre,
             self.get_tipo_display()
         )
+
+class RecursoAsignado(GeoModelo):
+    """
+    Representa un recurso que ha sido asignado a una organización y/o a un voluntario,
+    que puede tener una ubicación con una cantidad dada.
+    Hereda información de ubicación geográfica de GeoModelo.
+    """
+
+    recurso = models.ForeignKey(
+        Recurso,
+        on_delete=models.CASCADE,
+        related_name="asignaciones",
+        verbose_name="Recurso asignado"
+    )
+
+    cantidad = models.IntegerField(
+        default=1,
+        verbose_name="Cantidad"
+    )
+
+    organizacion = models.ForeignKey(
+        Organizacion,
+        on_delete=models.CASCADE,
+        related_name="recursos",
+        verbose_name="Organización asignada"
+    )
+
+    voluntario = models.ForeignKey(
+        Voluntario,
+        on_delete=models.CASCADE,
+        related_name="recursos",
+        verbose_name="Voluntario asignado",
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        """
+        Retorna una representación legible en cadena de caracteres de
+        la asignación de recursos representada por el modelo.
+        """
+
+        return "{0} de {1} (cant: {2})".format(
+            self.recurso,
+            self.organizacion,
+            self.cantidad
+        )
