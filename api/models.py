@@ -82,16 +82,15 @@ class Voluntario(models.Model):
     )
 
     # Tipos de documento de identidad
-    TIPO_VENEZOLANO = "V"
-    TIPO_EXTRANJERO = "E"
+    TIPO_VENEZOLANO = 0
+    TIPO_EXTRANJERO = 1
 
     TIPO_CHOICES = (
-        (TIPO_VENEZOLANO, "Venezolano"),
-        (TIPO_EXTRANJERO, "Extranjero"),
+        (TIPO_VENEZOLANO, "V"),
+        (TIPO_EXTRANJERO, "E"),
     )
 
-    tipo_identidad = models.CharField(
-        max_length=1,
+    tipo_identidad = models.IntegerField(
         choices=TIPO_CHOICES,
         default=TIPO_VENEZOLANO,
         verbose_name="Tipo de Documento de Identidad"
@@ -101,6 +100,13 @@ class Voluntario(models.Model):
         verbose_name="Nro. de Documento de Identidad"
     )
 
+    class Meta:
+        """
+        Permite definir configuraciones para el modelo Voluntario
+        """
+
+        unique_together = ("tipo_identidad", "nro_identidad")
+
     @property
     def identificacion(self):
         """
@@ -108,7 +114,7 @@ class Voluntario(models.Model):
         """
 
         return "{0}-{1}".format(
-            self.tipo_identidad,
+            self.get_tipo_identidad_display(),
             self.nro_identidad
         )
 
@@ -390,4 +396,43 @@ class Organizacion(GeoModelo):
         verbose_name="Dirigida por"
     )
 
+class Recurso(models.Model):
+    """
+    Representa un tipo de recurso que puede ser asignado a alguna organización.
+    """
 
+    nombre = models.CharField(
+        max_length=200,
+        verbose_name="Nombre"
+    )
+
+    # Posibles tipos de recursos
+    # TODO: Refinar lista de tipos posibles
+    TIPO_SALUD = 0
+    TIPO_ALIMENTACION = 1
+    TIPO_TRANSPORTE = 2
+    TIPO_OTROS = 999
+
+    TIPO_CHOICES = (
+        (TIPO_SALUD, "Salud"),
+        (TIPO_ALIMENTACION, "Alimentación"),
+        (TIPO_TRANSPORTE, "Transporte"),
+        (TIPO_OTROS, "Otros"),
+    )
+
+    tipo = models.IntegerField(
+        choices=TIPO_CHOICES,
+        default=TIPO_OTROS,
+        verbose_name="Tipo"
+    )
+
+    def __str__(self):
+        """
+        Retorna una representación como cadena de caracteres
+        del recurso.
+        """
+
+        return "{0} ({1})".format(
+            self.nombre,
+            self.get_tipo_display()
+        )
