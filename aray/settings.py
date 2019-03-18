@@ -134,6 +134,8 @@ MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 # Configuraciones de autenticación
 PASSWORD_RESET_TIMEOUT_DAYS = 3
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+LOGIN_URL = 'sesiones:login'
+LOGIN_REDIRECT_URL = 'dashboard:index'
 
 # Se cierra la sesion en dos dias: 60 segundos por minuto,
 # 60 minutos por hora, 24 horas por día, 2 días
