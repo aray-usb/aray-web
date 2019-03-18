@@ -9,5 +9,3 @@ Repositorio para la aplicación web (punto de encuentro principal) del software 
 ### Por considerar en la base de datos
 
 - Mensajes enviados por las organizaciones
-- Integrar usuarios de Django con voluntarios
-- Usuarios que emiten reporte, pueden ser usuarios anónimos
