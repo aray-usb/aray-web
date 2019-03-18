@@ -1,12 +1,30 @@
+"""
+Módulo que incluye los distintos modelos de la base de datos
+de Aray, incluyendo validadores y funciones adicionales.
+"""
+
 from datetime import datetime
+
 from django.contrib.auth import get_user_model
+from django.core.validators import RegexValidator
 from django.db import models
+
+"""
+Validadores
+"""
+
+class ValidadorDeTelefono(RegexValidator):
+    """
+    Validador que verifica que el formato de un número de teléfono
+    sea el prestablecido: (0XXX) XXX-XXXX
+    """
+
+    regex = r'\(0\d{3}\)\ \d{3}\-\d{4}'
+    message = "El número de teléfono no sigue el formato válido. Formato: (0XXX) XXX-XXXX"
 
 """
 Modelos de la base de datos de Aray.
 """
-
-
 class GeoModelo(models.Model):
     """
     Modelo abstracto que incluye maneras de representar geográficamente
@@ -38,6 +56,104 @@ class GeoModelo(models.Model):
         """
 
         abstract = True
+
+class Voluntario(models.Model):
+    """
+    Representa la información de un voluntario, modelo que regula el "perfil" de un
+    usuario. De su usuario asociado, podemos obtener: nombre, apellido, correo electrónico.
+    """
+
+    usuario = models.OneToOneField(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        verbose_name="Usuario asociado"
+    )
+
+    organizaciones = models.ManyToManyField(
+        "Organizacion",
+        related_name="voluntarios",
+        verbose_name="Organizaciones asociadas"
+    )
+
+    # El número de teléfono usa un validador personalizado
+    telefono = models.CharField(
+        max_length=15,
+        validators=[ValidadorDeTelefono]
+    )
+
+    # Tipos de documento de identidad
+    TIPO_VENEZOLANO = "V"
+    TIPO_EXTRANJERO = "E"
+
+    TIPO_CHOICES = (
+        (TIPO_VENEZOLANO, "Venezolano"),
+        (TIPO_EXTRANJERO, "Extranjero"),
+    )
+
+    tipo_identidad = models.CharField(
+        max_length=1,
+        choices=TIPO_CHOICES,
+        default=TIPO_VENEZOLANO,
+        verbose_name="Tipo de Documento de Identidad"
+    )
+
+    nro_identidad = models.IntegerField(
+        verbose_name="Nro. de Documento de Identidad"
+    )
+
+    @property
+    def identificacion(self):
+        """
+        Retorna una representación apropiada de la identificación del usuario.
+        """
+
+        return "{0}-{1}".format(
+            self.tipo_identidad,
+            self.nro_identidad
+        )
+
+    @property
+    def nombre(self):
+        """
+        Alias para el nombre del voluntario en español.
+        """
+
+        return self.usuario.first_name
+
+    @property
+    def nombre(self):
+        """
+        Alias para el apellido del voluntario en español.
+        """
+
+        return self.usuario.last_name
+
+    @property
+    def email(self):
+        """
+        Alias para el email del voluntario a partir del usuario asociado.
+        """
+
+        return self.usuario.email
+
+    @property
+    def es_director(self):
+        """
+        Determina si un voluntario es director de alguna organización asociada.
+        """
+
+        # 'dirige' es la relación inversa a Organizacion.dirigida_por
+        return self.dirige.all().count() > 0
+
+    def __str__(self):
+        """
+        Retorna una representación como string del Voluntario.
+        """
+
+        return "{0} {1}".format(
+            self.nombre,
+            self.apellido
+        )
 
 class Incidencia(GeoModelo):
     """
@@ -145,9 +261,9 @@ class Reporte(GeoModelo):
         verbose_name="Estado"
     )
 
-    # Si el reporte lo generó algún usuario, lo guardamos para futuros usos
+    # Si el reporte lo generó algún voluntario, lo guardamos para futuros usos
     reportado_por = models.ForeignKey(
-        get_user_model(),
+        Voluntario,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
@@ -174,4 +290,22 @@ class Reporte(GeoModelo):
 
         self.estado = Reporte.ESTADO_CONFIRMADO
         self.save()
+
+class Organizacion(GeoModelo):
+    """
+    Representa la información asociada a una organización de apoyo ante incidencias.
+    Hereda la ubicación geográfica de GeoModelo.
+    """
+
+    nombre = models.CharField(
+        max_length=200,
+        verbose_name="Nombre de la Organización"
+    )
+
+    dirigida_por = models.ManyToManyField(
+        Voluntario,
+        related_name="dirige",
+        verbose_name="Dirigida por"
+    )
+
 
