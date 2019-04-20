@@ -262,12 +262,14 @@ class Incidencia(GeoModelo):
     )
 
     # Posibles estados para la incidencia
+    ESTADO_RECHAZADA = -1
     ESTADO_NUEVA = 0
     ESTADO_CONFIRMADA = 1
     ESTADO_ATENDIDA = 2
     ESTADO_RESUELTA = 3
 
     ESTADO_CHOICES = (
+        (ESTADO_RECHAZADA, "Rechazada"),
         (ESTADO_NUEVA, "Nueva"),
         (ESTADO_CONFIRMADA, "Confirmada"),
         (ESTADO_ATENDIDA, "Atendida"),
