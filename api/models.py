@@ -254,6 +254,11 @@ class Incidencia(GeoModelo):
         verbose_name="Nombre de la Incidencia"
     )
 
+    descripcion = models.TextField(
+        default="",
+        verbose_name="Descripción"
+    )
+
     # Posibles estados para la incidencia
     ESTADO_NUEVA = 0
     ESTADO_CONFIRMADA = 1
@@ -296,7 +301,7 @@ class Incidencia(GeoModelo):
         Determina si una incidencia se encuentra en curso.
         """
 
-        return self.estado != Incidencia.ESTATUS_RESUELTA
+        return self.estado != Incidencia.ESTADO_RESUELTA
 
     def cambiar_estado(self, nuevo_estado):
         """
@@ -304,7 +309,7 @@ class Incidencia(GeoModelo):
         y marca las fechas importantes en caso de ser requeridas.
         """
 
-        estados_validos = [estado[0] for estado in Incidencia.ESTATUS_CHOICES]
+        estados_validos = [estado[0] for estado in Incidencia.ESTADO_CHOICES]
 
         # Si el nuevo estado no es válido, no hacemos ningún cambio
         if nuevo_estado not in estados_validos:
