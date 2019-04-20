@@ -173,6 +173,7 @@ class Tarea(models.Model):
 
     descripcion = models.TextField(
         default="",
+        blank=True,
         verbose_name="Descripción"
     )
 
@@ -256,6 +257,7 @@ class Incidencia(GeoModelo):
 
     descripcion = models.TextField(
         default="",
+        blank=True,
         verbose_name="Descripción"
     )
 
