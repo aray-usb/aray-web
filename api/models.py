@@ -127,7 +127,7 @@ class Voluntario(models.Model):
         return self.usuario.first_name
 
     @property
-    def nombre(self):
+    def apellido(self):
         """
         Alias para el apellido del voluntario en español.
         """
