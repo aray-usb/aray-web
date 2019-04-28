@@ -34,7 +34,6 @@
 }
 
 .toast-item-close {
-    background:url(../images/notify/close.gif);
     width:22px;
     height:22px;
     position: absolute;
@@ -49,8 +48,6 @@
     top: 15px;
     left: 5px;
 }
-
-
 
 /** 
  * toast types 
