@@ -3,7 +3,7 @@ Implementación de distintos serializadores para enviar
 información de los modelos de la aplicación a través de la API.
 """
 
-from api.models import Incidencia
+from apps.api.models import Incidencia
 from rest_framework import serializers
 
 class IncidenciaSerializer(serializers.HyperlinkedModelSerializer):
