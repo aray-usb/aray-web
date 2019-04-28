@@ -358,6 +358,11 @@ class Reporte(GeoModelo):
         verbose_name="Estado"
     )
 
+    fecha_de_reporte = models.DateTimeField(
+        verbose_name="Fecha de Reporte",
+        auto_now_add=True
+    )
+
     # Si el reporte lo generó algún voluntario, lo guardamos para futuros usos
     reportado_por = models.ForeignKey(
         Voluntario,
