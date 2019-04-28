@@ -3,8 +3,8 @@ Implementación de los distintos endpoints de la API
 a través de views y viewsets.
 """
 
-from apps.api.models import Incidencia
-from apps.api.serializers import IncidenciaSerializer
+from api.models import Incidencia
+from api.serializers import IncidenciaSerializer
 
 from rest_framework import viewsets, mixins
 

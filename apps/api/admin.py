@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.api.models import (
+from api.models import (
     Voluntario,
     Tarea,
     Incidencia,
