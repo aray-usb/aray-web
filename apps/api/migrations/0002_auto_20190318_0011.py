@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
             name='Voluntario',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('telefono', models.CharField(max_length=15, validators=[api.models.ValidadorDeTelefono])),
+                ('telefono', models.CharField(max_length=15, validators=[apps.api.models.ValidadorDeTelefono])),
                 ('tipo_identidad', models.CharField(choices=[('V', 'Venezolano'), ('E', 'Extranjero')], default='V', max_length=1, verbose_name='Tipo de Documento de Identidad')),
                 ('nro_identidad', models.IntegerField(max_length=8, verbose_name='Nro. de Documento de Identidad')),
                 ('organizaciones', models.ManyToManyField(related_name='voluntarios', to='api.Organizacion', verbose_name='Organizaciones asociadas')),

@@ -34,7 +34,6 @@
 }
 
 .toast-item-close {
-    background:url(../images/notify/close.gif);
     width:22px;
     height:22px;
     position: absolute;
@@ -49,23 +48,6 @@
     top: 15px;
     left: 5px;
 }
-
-.toast-item-image-notice {
-    background:url(../images/notify/notice.png);
-}
-
-.toast-item-image-success {
-    background:url(../images/notify/success.png);
-}
-
-.toast-item-image-warning {
-    background:url(../images/notify/warning.png);
-}
-
-.toast-item-image-error {
-    background:url(../images/notify/error.png);
-}
-
 
 /** 
  * toast types 
