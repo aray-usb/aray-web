@@ -12,6 +12,11 @@ router.register(
     r'incidencias',
     views.IncidenciaViewSet
 )
+router.register(
+    r'reportes',
+    views.ReporteViewSet
+)
+
 
 app_name = "api"
 
