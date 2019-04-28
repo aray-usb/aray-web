@@ -45,8 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api',
-    'sesiones',
+    'apps.api',
+    'apps.accounts',
     'rest_framework',
     'rest_framework.authtoken',
 ]
@@ -147,7 +147,7 @@ MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 # Configuraciones de autenticación
 PASSWORD_RESET_TIMEOUT_DAYS = 3
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-LOGIN_URL = 'sesiones:login'
+LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'dashboard:index'
 
 # Se cierra la sesion en dos dias: 60 segundos por minuto,
@@ -170,3 +170,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     )
 }
+
+AUTHENTICATION_BACKENDS = (
+    ('django.contrib.auth.backends.ModelBackend'),
+)
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'youremail@gmail.com'
+EMAIL_HOST_PASSWORD = 'yourpassword'
+EMAIL_PORT = 587
