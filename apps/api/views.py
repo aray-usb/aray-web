@@ -29,14 +29,15 @@ class IncidenciaViewSet(mixins.RetrieveModelMixin,
     serializer_class = IncidenciaSerializer
 
 class ReporteViewSet(mixins.RetrieveModelMixin,
-                        mixins.UpdateModelMixin,
-                        mixins.ListModelMixin,
-                        viewsets.GenericViewSet):
+                     mixins.CreateModelMixin,
+                     mixins.UpdateModelMixin,
+                     mixins.ListModelMixin,
+                     viewsets.GenericViewSet):
     """
     Endpoint de la API para listar, actualizar y
     ver detalles de los reportes.
 
-    Métodos permitidos: GET, PUT, PATCH.
+    Métodos permitidos: GET, POST, PUT, PATCH.
     """
 
     queryset = Reporte.objects.all().order_by('-fecha_de_reporte')
