@@ -176,7 +176,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'youremail@gmail.com'
-EMAIL_HOST_PASSWORD = 'yourpassword'
+EMAIL_HOST = os.environ.get('ARAY_EMAIL_HOST', "")
+EMAIL_HOST_USER = os.environ.get('ARAY_EMAIL_USER', "")
+EMAIL_HOST_PASSWORD = os.environ.get('ARAY_EMAIL_PASSWORD', "")
 EMAIL_PORT = 587
