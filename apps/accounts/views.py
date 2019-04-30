@@ -73,7 +73,7 @@ def login_process(request):
         return redirect(next_url)
     else:
         print('no lo logramos :(')
-        messages.error(request, 'Document deleted.')
+        #messages.error(request, 'Document deleted.')
 
 def auth(request):
     
