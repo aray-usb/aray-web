@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
 from django.views import generic
@@ -35,9 +35,9 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')
 
-def register_process(request, form_class):
+def register_process(request):
 
-    form = form_class(data=request.POST)
+    form = UserCreationForm(data=request.POST)
     if form.is_valid():
         user = form.save(commit=False)
         user.is_active = False
@@ -61,9 +61,9 @@ def register_process(request, form_class):
     return render(request, 'accounts/auth.html', {'form': form})
 
 
-def login_process(request, form_class):
+def login_process(request):
 
-    form = form_class(data=request.POST)
+    form = AuthenticationForm(data=request.POST)
     next_url = request.GET.get('next', 'dashboard:index')
     if form.is_valid():
         # Autenticamos al usuario en la sesión
@@ -76,16 +76,16 @@ def login_process(request, form_class):
         messages.error(request, 'Document deleted.')
 
 def auth(request):
-    form_class=AuthenticationForm
+    
     template_name="accounts/auth.html"
     # Redirigimos a usuarios ya autenticados
     if request.user.is_authenticated:
         return redirect('dashboard:index')
     
     if 'register' in request.POST and request.method == 'POST':
-        register_process(request, form_class)
+        register_process(request)
     elif 'login' in request.POST and request.method == 'POST':
-        login_process(request, form_class)
+        login_process(request)
 
     return render(request, template_name)
 
