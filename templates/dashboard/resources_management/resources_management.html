@@ -1,0 +1,206 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class="row purchace-popup">
+
+        <div class="col-lg-7 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-aray mb-5">Resúmen de Artículos Registrados</h2>
+                    <div class="wrapper d-flex justify-content-between">
+                        <div class="side-left">
+                            <p class="mb-2 text-gray">Número de artículos registrados:</p>
+                            <p class="display-3 mb-4 font-weight-light text-gray">321 artículos</p>
+                        </div>
+                    </div>
+                    <div class="wrapper">
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2 text-gray">Medicinas</p>
+                            <p class="mb-2 text-primary">12%</p>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: 12%" aria-valuenow="88"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="wrapper mt-4">
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2 text-gray">Alimentos</p>
+                            <p class="mb-2 text-dark">36%</p>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" role="progressbar" style="width: 36%" aria-valuenow="56"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="wrapper mt-4">
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2 text-gray">Artículos de Rescate</p>
+                            <p class="mb-2 text-warning">7%</p>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: 7%" aria-valuenow="88"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="wrapper mt-4">
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2 text-gray">Vehículos</p>
+                            <p class="mb-2 text-success">72%</p>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 72%" aria-valuenow="56"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <span class="d-block d-md-flex align-items-center">
+                <p>¡Registra un nuevo bien aquí!</p>
+                <a class="btn purchase-button mt-4 mt-md-0" href="#" target="_blank">Registrar bien</a>
+            </span>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+            <div class="card-body">
+                <h3 class="card-title text-gray">Recursos Registrados</h3>
+                <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>
+                        #
+                        </th>
+                        <th>
+                        Nombre
+                        </th>
+                        <th>
+                        Tipo de Recurso
+                        </th>
+                        <th>
+                        Fecha de Registro
+                        </th>
+                        <th>
+                        Precio de Compra
+                        </th>
+                        <th>
+                        Cantidad
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            Toyota Fortuner
+                        </td>
+                        <td>
+                            <label class="badge badge-success">Vehículos</label>
+                        </td>
+                        <td>
+                            28 May, 2015
+                        </td>
+                        <td>
+                            30000000 Bs.S.
+                        </td>
+                        <td>
+                            2
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            2
+                        </td>
+                        <td>
+                            Atún en Lata
+                        </td>
+                        <td>
+                            <label class="badge badge-dark">Alimentos</label>
+                        </td>
+                        <td>
+                            12 Sept, 2011
+                        </td>
+                        <td>
+                            127000 Bs.S.
+                        </td>
+                        <td>
+                            4
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            3
+                        </td>
+                        <td>
+                            Cascos Protextores
+                        </td>
+                        <td>
+                            <label class="badge badge-warning">Artículo de Rescate</label>
+                        </td>
+                        <td>
+                            01 Ene, 2019
+                        </td>
+                        <td>
+                            450000 Bs.S.
+                        </td>
+                        <td>
+                            10
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            4
+                        </td>
+                        <td>
+                            Leche en Polvo
+                        </td>
+                        <td>
+                            <label class="badge badge-dark">Alimentos</label>
+                        </td>
+                        <td>
+                            28 Feb, 2016
+                        </td>
+                        <td>
+                            4520000 Bs.S.
+                        </td>
+                        <td>
+                            20
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            5
+                        </td>
+                        <td>
+                            Azitromicina
+                        </td>
+                        <td>
+                            <label class="badge badge-primary">Medicinas</label>
+                        </td>
+                        <td>
+                            15 Mar, 2019
+                        </td>
+                        <td>
+                            20000 Bs.S.
+                        </td>
+                        <td>
+                            1
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

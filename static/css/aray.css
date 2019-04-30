@@ -13313,6 +13313,15 @@ button.bg-dark:focus {
 .text-white {
   color: #fff !important; }
 
+.text-gray {
+  color: rgb(100, 100, 100) !important;
+}
+.text-aray {
+  color: #F07049 !important; }
+
+a.text-aray:hover, a.text-aray:focus {
+  color: #ff6858 !important; }
+
 .text-primary {
   color: #308ee0 !important; }
 
@@ -14478,11 +14487,10 @@ pre {
   height: 200px; }
 
 .purchace-popup > div > span {
-  background: rgba(228, 228, 228, 0.46);
+  background: rgba(243, 190, 134, 0.35);
   padding: 15px 20px;
   border-radius: 3px; }
   .purchace-popup > div > span .btn {
-    margin-right: 20px;
     font-weight: 500;
     color: #ffffff;
     border-radius: 5px; }
@@ -14494,11 +14502,11 @@ pre {
       background-color: #d209fa;
       *zoom: 1;
       filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFD209FA', endColorstr='#FF4F81D4');
-      background-image: -owg-linear-gradient(left, #d209fa 1%, #4f81d4 100%);
-      background-image: -webkit-linear-gradient(left, #d209fa 1%, #4f81d4 100%);
-      background-image: -moz-linear-gradient(left, #d209fa 1%, #4f81d4 100%);
-      background-image: -o-linear-gradient(left, #d209fa 1%, #4f81d4 100%);
-      background-image: linear-gradient(left, #d209fa 1%, #4f81d4 100%);
+      background-image: -owg-linear-gradient(left, #FFBC4E 1%, #F07049 100%);
+      background-image: -webkit-linear-gradient(left, #FFBC4E 1%, #F07049 100%);
+      background-image: -moz-linear-gradient(left, #FFBC4E 1%, #F07049 100%);
+      background-image: -o-linear-gradient(left, #FFBC4E 1%, #F07049 100%);
+      background-image: linear-gradient(left, #FFBC4E 1%, #F07049 100%);
       color: #ffffff;
       border: none;
       line-height: 1;
@@ -14506,6 +14514,7 @@ pre {
   .purchace-popup > div > span p {
     margin-bottom: auto;
     margin-top: auto;
+    margin-right: 14%;
     color: #7e7e7e;
     font-weight: 400;
     vertical-align: middle;
