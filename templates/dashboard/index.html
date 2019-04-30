@@ -4,125 +4,75 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-md-3">
-            <div class="card" style="text-align: center;">
-                <div class="header">
-                    <i class="fa fa-globe fa-5x" aria-hidden="true" style="color: #26BF63; display: inline;"></i>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 grid-margin stretch-card">
+        <div class="card card-statistics">
+            <div class="card-body">
+            <div class="clearfix">
+                <div class="float-left">
+                <i class="fa fa-map fa-5x text-danger"></i>
                 </div>
-                <div class="content">
-                    <h4 class="title">Mapa de Incidencias</h4>
+                <div class="float-right">
+                <p class="mb-0 text-right">Mapa de Incidencias</p>
+                <div class="fluid-container">
+                    <h3 class="font-weight-medium text-right mb-0">24 Incidencias</h3>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card" style="text-align: center;">
-                <div class="header">
-                    <i class="fa fa-exclamation-triangle fa-5x" aria-hidden="true" style="color: orange; display: inline;"></i>
-                </div>
-                <div class="content">
-                    <h4 class="title">Respuesta Inmediata</h4>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card" style="text-align: center;">
-                <div class="header">
-                    <i class="fa fa-files-o fa-5x" aria-hidden="true" style="color: #AA9FF0; display: inline;"></i>
-                </div>
-                <div class="content">
-                    <h4 class="title">Administración de Personal</h4>
-                </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card" style="text-align: center;">
-                <div class="header">
-                    <i class="fa fa-cogs fa-5x" aria-hidden="true" style="color: gray; display: inline;"></i>
+        </div>  
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 grid-margin stretch-card">
+        <div class="card card-statistics">
+            <div class="card-body">
+            <div class="clearfix">
+                <div class="float-left">
+                <i class="fa fa-users fa-5x text-warning"></i>
                 </div>
-                <div class="content">
-                    <h4 class="title">Configuración del Sitio</h4>
+                <div class="float-right">
+                <p class="mb-0 text-right">Gestión de Personal</p>
+                <div class="fluid-container">
+                    <h3 class="font-weight-medium text-right mb-0">37 empleados</h3>
+                </div>
                 </div>
             </div>
+            </div>
         </div>
+        </div>            
     </div>
-
     <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-
-                <div class="header">
-                    <h4 class="title">Tareas Pendientes</h4>
-                    <p class="category">Atención de Desastres</p>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 grid-margin stretch-card">
+        <div class="card card-statistics">
+            <div class="card-body">
+            <div class="clearfix">
+                <div class="float-left">
+                <i class="fa fa-check fa-5x text-success"></i>
                 </div>
-
-                <div class="content">
-                    <div class="table-full-width">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td class="checkbox-cell">
-                                        <div class="checkbox">
-                                            <input id="checkbox1" type="checkbox">
-                                            <label for="checkbox1"></label>
-                                        </div>
-                                    </td>
-                                    <td>Tarea Asignada No. 1 </td>
-                                    <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="checkbox-cell">
-                                        <div class="checkbox">
-                                            <input id="checkbox2" type="checkbox" checked>
-                                            <label for="checkbox2"></label>
-                                        </div>
-                                    </td>
-                                    <td>Tarea Asignada No. 2 </td>
-                                    <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="checkbox-cell">
-                                        <div class="checkbox">
-                                            <input id="checkbox3" type="checkbox">
-                                            <label for="checkbox3"></label>
-                                        </div>
-                                    </td>
-                                    <td>Tarea Asignada No. 3
-                                    </td>
-                                    <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="footer">
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-history"></i> Actualizado hace 5 minutos
-                        </div>
-                    </div>
+                <div class="float-right">
+                <p class="mb-0 text-right">Lista de Asignaciones</p>
+                <div class="fluid-container">
+                    <h3 class="font-weight-medium text-right mb-0">7 to dos pendientes</h3>
+                </div>
                 </div>
             </div>
+            </div>
         </div>
+        </div>  
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 grid-margin stretch-card">
+        <div class="card card-statistics">
+            <div class="card-body">
+            <div class="clearfix">
+                <div class="float-left">
+                <i class="fa fa-money fa-5x text-info"></i>
+                </div>
+                <div class="float-right">
+                <p class="mb-0 text-right">Gestión de Recursos</p>
+                <div class="fluid-container">
+                    <h3 class="font-weight-medium text-right mb-0">12 items registrados</h3>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>            
     </div>
 {% endblock %}
