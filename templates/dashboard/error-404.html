@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="application-name" content="Aray" />
+        <link rel="icon" type="image/png" href="{% static 'icons/favicon.ico' %}" />
+        <link rel="shortcut icon" type="image/png" href="{% static 'icons/favicon.ico' %}" />
+
+        <title>{% block title %}ERROR 404{% endblock %} | Aray</title>
+
+        <!-- Archivos CSS -->
+        <link href="{% static 'css/aray.css' %}" rel="stylesheet" />
+        {% block css %}{% endblock %}
+    </head>
+    <body>
+
+      <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper auth-page">
+          <div class="content-wrapper d-flex align-items-center text-center error-page bg-aray">
+            <div class="row flex-grow">
+              <div class="col-lg-7 mx-auto text-white">
+                <div class="row align-items-center d-flex flex-row">
+                  <div class="col-lg-6 text-lg-right pr-lg-4">
+                    <h1 class="display-1 mb-0">404</h1>
+                  </div>
+                  <div class="col-lg-6 error-page-divider text-lg-left pl-lg-4">
+                    <h2>Disculpe,</h2>
+                    <h3 class="font-weight-light">La página que estabas buscando no fue encontrada.</h3>
+                  </div>
+                </div>
+                <div class="row mt-5">
+                  <div class="col-12 text-center mt-xl-2">
+                    <a class="text-white font-weight-medium" href="{% url 'dashboard:index' %}">Regresar al Dashboard</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      {% block js %}{% endblock %}
+    </body>
+</html>
