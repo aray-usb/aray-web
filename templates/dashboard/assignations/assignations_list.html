@@ -1,0 +1,102 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Assignements List{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <h3 class="text-gray mb-4">Lista de Tareas por Hacer</h3>
+                <span class="d-block align-items-center">
+                    <a class="btn gradient-button mt-4 mt-md-0" href="#" target="_blank">Crear to do</a>
+                </span>
+            </div>
+            <div class="fluid-container">
+            <div class="row ticket-card mt-3 pb-2 border-bottom pb-3 mb-3">
+                <div class="col-md-1">
+                    <i class="fa fa-flag fa-3x" style="color:orange;"></i>
+                </div>
+                <div class="ticket-details col-md-9">
+                    <div class="d-flex">
+                        <p class="text-dark font-weight-semibold mr-2 mb-0 no-wrap">Usuario :</p>
+                        <p class="text-primary mr-1 mb-0">[#56421]</p>
+                        <p class="mb-0 ellipsis">Titulo del to do</p>
+                    </div>
+                        <p class="text-gray ellipsis mb-2">Pellentesque in ipsum id orci porta dapibus. Sed porttitor lectus nibh. Curabitur non nulla sit amet
+                        nisl.</p>
+                    <div class="row text-gray d-md-flex d-none">
+                        <div class="col-4 d-flex">
+                            <small class="mb-0 mr-2 text-muted">Creación del to do:</small>
+                            <small class="Last-responded mr-2 mb-0 text-muted">Ayer</small>
+                        </div>
+                        <div class="col-4 d-flex">
+                            <small class="mb-0 mr-2 text-muted">Hacer antes de:</small>
+                            <small class="Last-responded mr-2 mb-0 text-muted">12 May, 2019</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="ticket-actions col-md-2">
+                    <div class="btn-group dropdown">
+                        <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Acciones
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">
+                                <i class="fa fa-reply fa-fw"></i>Marcar como listo</a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa fa-history fa-fw"></i>Eliminar to do</a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa fa-check text-success fa-fw"></i>Editar to do</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ticket-card mt-3 pb-2 border-bottom pb-3 mb-3">
+                <div class="col-md-1">
+                    <i class="fa fa-flag fa-3x" style="color:green;"></i>
+                </div>
+                <div class="ticket-details col-md-9">
+                    <div class="d-flex">
+                        <p class="text-dark font-weight-semibold mr-2 mb-0 no-wrap">Usuario :</p>
+                        <p class="text-primary mr-1 mb-0">[#23135]</p>
+                        <p class="mb-0 ellipsis">Titulo del to do</p>
+                    </div>
+                        <p class="text-gray ellipsis mb-2">Pellentesque in ipsum id orci porta dapibus. Sed porttitor lectus nibh. Curabitur non nulla sit amet
+                        nisl.</p>
+                    <div class="row text-gray d-md-flex d-none">
+                        <div class="col-4 d-flex">
+                            <small class="mb-0 mr-2 text-muted">Creación del to do:</small>
+                            <small class="Last-responded mr-2 mb-0 text-muted">Hace 3 horas</small>
+                        </div>
+                        <div class="col-4 d-flex">
+                            <small class="mb-0 mr-2 text-muted">Hacer antes de:</small>
+                            <small class="Last-responded mr-2 mb-0 text-muted">29 Jun, 2019</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="ticket-actions col-md-2">
+                    <div class="btn-group dropdown">
+                        <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Acciones
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">
+                                <i class="fa fa-reply fa-fw"></i>Marcar como listo</a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa fa-history fa-fw"></i>Eliminar to do</a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa fa-check text-success fa-fw"></i>Editar to do</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
