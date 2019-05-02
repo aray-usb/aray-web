@@ -44,7 +44,7 @@ def register_process(request):
         user.save()
         current_site = get_current_site(request)
         message = render_to_string('accounts/activation.html', {
-            'user':user, 
+            'user':user,
             'domain':current_site.domain,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
@@ -76,16 +76,18 @@ def login_process(request):
         #messages.error(request, 'Document deleted.')
 
 def auth(request):
-    
+
     template_name="accounts/auth.html"
     # Redirigimos a usuarios ya autenticados
     if request.user.is_authenticated:
         return redirect('dashboard:index')
-    
+
     if 'register' in request.POST and request.method == 'POST':
-        register_process(request)
+        return register_process(request)
     elif 'login' in request.POST and request.method == 'POST':
-        login_process(request)
+        login_attempt = login_process(request)
+        if login_attempt:
+            return login_attempt
 
     return render(request, template_name)
 
