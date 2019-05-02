@@ -13,8 +13,8 @@
 
         <!-- Archivos CSS -->
         <link href="{% static 'css/aray.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/leaflet.css' %}" rel="stylesheet" />
         <link href="{% static 'vendors/iconfonts/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
         {% block css %}{% endblock %}
     </head>
     <body>
@@ -38,11 +38,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
                         <i class="fa fa-bell"></i>
-                        <span class="count">4</span>
+                        <span class="count">3</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                             <a class="dropdown-item">
-                                <p class="mb-0 font-weight-normal float-left">Tienes 4 notificaciones
+                                <p class="mb-0 font-weight-normal float-left">Tienes 3 notificaciones
                                 </p>
                                 <span class="badge badge-pill badge-warning float-right">Ver todas</span>
                             </a>
@@ -128,7 +128,11 @@
 
         </div>
 
+        <script src="{% static 'js/leaflet.js' %}" type="text/javascript"></script>
         <script src="{% static 'js/vendor.bundle.base.js' %}" type="text/javascript"></script>
+        <script type="text/javascript">
+            var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+        </script>
         {% block js %}{% endblock %}
     </body>
 
