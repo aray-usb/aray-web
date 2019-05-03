@@ -1,3 +1,7 @@
+"""
+URLs (routing) para el gestor de recursos del dashboard
+"""
+
 from django.urls import path
 from . import views
 
