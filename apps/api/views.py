@@ -3,16 +3,10 @@ Implementación de los distintos endpoints de la API
 a través de views y viewsets.
 """
 
-from apps.api.models import (
-    Incidencia,
-    Reporte
-)
-from apps.api.serializers import (
-    IncidenciaSerializer,
-    ReporteSerializer
-)
+from rest_framework import mixins, viewsets
 
-from rest_framework import viewsets, mixins
+from apps.api.models import Incidencia, Reporte
+from apps.api.serializers import IncidenciaSerializer, ReporteSerializer
 
 class IncidenciaViewSet(mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
