@@ -5,7 +5,8 @@ información de los modelos de la aplicación a través de la API.
 
 from apps.api.models import (
     Incidencia,
-    Reporte
+    Reporte,
+    Tarea
 )
 from rest_framework import serializers
 
@@ -44,9 +45,32 @@ class ReporteSerializer(serializers.HyperlinkedModelSerializer):
 
         model = Reporte
         fields = (
+            'id',
             'incidencia',
             'contenido',
             'estado',
             'fecha_de_reporte',
             'reportado_por'
+        )
+
+class TareaSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializador del modelo Tarea.
+    """
+
+    class Meta:
+        """
+        Clase interna para configurar detalles del serializador.
+        """
+
+        model = Tarea
+        fields = (
+            'id',
+            'titulo',
+            'descripcion',
+            'fecha_limite',
+            'fecha_de_resolucion',
+            'estado',
+            'asignada_por',
+            'asignada_a',
         )
