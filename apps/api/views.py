@@ -49,5 +49,5 @@ class TareaViewSet(mixins.RetrieveModelMixin,
     Métodos permitidos: GET, PUT, PATCH.
     """
 
-    queryset = Tarea.objects.all().order_by('-fecha_de_reporte')
+    queryset = Tarea.objects.all().order_by('fecha_limite')
     serializer_class = TareaSerializer
