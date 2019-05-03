@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'apps.dashboard.resources_management',
     'apps.dashboard.personal_management',
     'apps.dashboard.map',
-    'apps.dashboard.assignations',
+    'apps.dashboard.assignments',
     'rest_framework',
     'rest_framework.authtoken',
 ]
