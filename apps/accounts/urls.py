@@ -1,3 +1,7 @@
+"""
+URLs (routing) para el manejo de sesiones de usuario
+"""
+
 from django.urls import path, re_path
 from . import views
 
@@ -5,8 +9,8 @@ app_name = "accounts"
 
 urlpatterns = [
     path(
-        '', 
-        views.auth, 
+        '',
+        views.auth,
         name="auth"
     ),
     re_path(
@@ -15,8 +19,8 @@ urlpatterns = [
         name='activate'
     ),
     path(
-        'cerrar-sesion/', 
-        views.logout_view, 
+        'cerrar-sesion/',
+        views.logout_view,
         name="logout"
     ),
 ]

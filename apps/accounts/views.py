@@ -1,24 +1,21 @@
+"""
+Controladores (views) referentes al manejo de sesiones de usuario.
+"""
+
 from django.contrib import messages
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, logout
-from django.shortcuts import render, redirect
-from django.views import generic
-from django.contrib import messages
-
-from django.http import HttpResponse, HttpResponseRedirect
-
-from django.urls import reverse_lazy
-
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.models import User
-from .tokens import account_activation_token
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
-
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
+from .tokens import account_activation_token
 
 def activate(request, uidb64, token):
     try:
@@ -76,18 +73,27 @@ def login_process(request):
         #messages.error(request, 'Document deleted.')
 
 def auth(request):
+    """
+    Controlador del formulario de registro e inicio de sesión.
+
+    GET: Muestra la vista de login y registro.
+    POST: Intenta realizar un registro o login, de acuerdo a sea el caso.
+    """
 
     template_name="accounts/auth.html"
+
     # Redirigimos a usuarios ya autenticados
     if request.user.is_authenticated:
         return redirect('dashboard:index')
 
-    if 'register' in request.POST and request.method == 'POST':
-        return register_process(request)
-    elif 'login' in request.POST and request.method == 'POST':
-        login_attempt = login_process(request)
-        if login_attempt:
-            return login_attempt
+    # Si la petición es POST, realizamos el proceso correspondiente
+    if request.method == 'POST':
+        if 'register' in request.POST:
+            return register_process(request)
+        elif 'login' in request.POST:
+            login_attempt = login_process(request)
+            if login_attempt:
+                return login_attempt
 
     return render(request, template_name)
 
@@ -100,4 +106,3 @@ def logout_view(request):
 
     logout(request)
     return redirect('accounts:auth')
-
