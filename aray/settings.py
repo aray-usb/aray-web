@@ -23,6 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', '6-gut-+)a99y$&jkuvq7j940b)q0-gx$9j(x1%4k=s11jjz$59')
 
+# Para la recepción de errores
+ADMINS = (
+    ('Aray', 'arayusb@gmail.com'),
+)
+
 # IMPORTANTE: Esta variable permite saber si estamos en un entorno de desarrollo
 # o en produción
 # SECURITY WARNING: don't run with debug turned on in production!
