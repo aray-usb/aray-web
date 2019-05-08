@@ -3,12 +3,52 @@ Implementación de distintos serializadores para enviar
 información de los modelos de la aplicación a través de la API.
 """
 
+from django.contrib.auth.models import User
 from apps.api.models import (
     Incidencia,
     Reporte,
-    Tarea
+    Tarea,
+    Voluntario
 )
 from rest_framework import serializers
+
+class UsuarioSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializador del modelo Usuario.
+    """
+
+    class Meta:
+        """
+        Clase interna para configurar detalles del serializador.
+        """
+
+        model = User
+        fields = (
+            'id',
+            'first_name',
+            'last_name',
+            'email',
+        )
+
+class VoluntarioSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializador del modelo Voluntario.
+    """
+
+    usuario = UsuarioSerializer()
+
+    class Meta:
+        """
+        Clase interna para configurar detalles del serializador.
+        """
+
+        model = Voluntario
+        fields = (
+            'id',
+            'usuario',
+            'tipo_identidad',
+            'nro_identidad',
+        )
 
 class IncidenciaSerializer(serializers.HyperlinkedModelSerializer):
     """
@@ -37,6 +77,8 @@ class ReporteSerializer(serializers.HyperlinkedModelSerializer):
     """
     Serializador del modelo Reporte.
     """
+
+    reportado_por = VoluntarioSerializer()
 
     class Meta:
         """
