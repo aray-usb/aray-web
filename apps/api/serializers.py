@@ -78,6 +78,7 @@ class ReporteSerializer(serializers.HyperlinkedModelSerializer):
     Serializador del modelo Reporte.
     """
 
+    incidencia = IncidenciaSerializer()
     reportado_por = VoluntarioSerializer()
 
     class Meta:
