@@ -3,10 +3,22 @@ Implementación de los distintos endpoints de la API
 a través de views y viewsets.
 """
 
-from rest_framework import mixins, viewsets
+import decimal
 
-from apps.api.models import Incidencia, Reporte, Tarea
-from apps.api.serializers import IncidenciaSerializer, ReporteSerializer, TareaSerializer
+from rest_framework import mixins, viewsets
+from rest_framework.response import Response
+
+from apps.api.models import (
+    Incidencia,
+    Reporte,
+    Tarea
+)
+
+from apps.api.serializers import (
+    IncidenciaSerializer,
+    ReporteSerializer,
+    TareaSerializer
+)
 
 class IncidenciaViewSet(mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
@@ -36,6 +48,24 @@ class ReporteViewSet(mixins.RetrieveModelMixin,
 
     queryset = Reporte.objects.all().order_by('-fecha_de_reporte')
     serializer_class = ReporteSerializer
+
+    def list(self, request, *args, **kwargs):
+        """
+        Retorna una respuesta que enlista los reportes.
+        Ubica los reportes a menos de 5km de una latitud y longitud, si se pasa.
+        """
+
+        # Intentamos obtener parámetros de ubicación para filtrar
+        latitud = float(request.GET.get('lat'))
+        longitud = float(request.GET.get('long'))
+
+        if latitud is not None and longitud is not None:
+            queryset = Reporte.obtener_cercanos(latitud, longitud)
+        else:
+            queryset = self.filter_queryset(self.get_queryset())
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 class TareaViewSet(mixins.RetrieveModelMixin,
                    mixins.CreateModelMixin,
