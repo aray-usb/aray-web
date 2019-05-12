@@ -9,6 +9,8 @@ from django.contrib.auth import get_user_model
 from django.core.validators import RegexValidator
 from django.db import models
 
+from math import cos, asin, sqrt
+
 """
 Validadores
 """
@@ -49,6 +51,21 @@ class GeoModelo(models.Model):
         blank=True,
         null=True
     )
+
+    def es_cercano_a(self, lat, long):
+        """
+        Determina si un geomodelo se encuentra cercano a una ubicación.
+        Más información: https://stackoverflow.com/a/21623206
+        """
+
+        # pi / 180
+        p = 0.017453292519943295
+        a = 0.5 - cos((float(self.latitud) - lat) * p)/2 + cos(lat * p) * cos(float(self.latitud) * p) * (1 - cos((float(self.longitud) - long) * p)) / 2
+
+        # En kilómetros
+        distancia = 12742 * asin(sqrt(a))
+
+        return distancia < 5
 
     class Meta:
         """
@@ -392,6 +409,30 @@ class Reporte(GeoModelo):
 
         self.estado = Reporte.ESTADO_CONFIRMADO
         self.save()
+
+    @staticmethod
+    def obtener_cercanos(lat, long):
+        """
+        Retorna los reportes activos cercanos a un punto, dado
+        por su latitud y longitud.
+        """
+
+        reportes = Reporte.objects.all()
+
+        # Rechazamos los reportes rechazados o resueltos
+        reportes = reportes.exclude(
+            incidencia__estado=Incidencia.ESTADO_RECHAZADA
+        ).exclude(
+            incidencia__estado=Incidencia.ESTADO_RESUELTA
+        )
+
+        reportes_cercanos = []
+
+        for reporte in reportes:
+            if reporte.es_cercano_a(lat, long):
+                reportes_cercanos.append(reporte)
+
+        return reportes_cercanos
 
 class Organizacion(GeoModelo):
     """
