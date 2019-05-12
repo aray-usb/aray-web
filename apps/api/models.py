@@ -34,14 +34,14 @@ class GeoModelo(models.Model):
     """
 
     latitud = models.DecimalField(
-        max_digits=9,
-        decimal_places=6,
+        max_digits=10,
+        decimal_places=7,
         verbose_name="Latitud"
     )
 
     longitud = models.DecimalField(
-        max_digits=9,
-        decimal_places=6,
+        max_digits=10,
+        decimal_places=7,
         verbose_name="Longitud"
     )
 
