@@ -92,6 +92,8 @@ class ReporteSerializer(serializers.HyperlinkedModelSerializer):
             'incidencia',
             'contenido',
             'estado',
+            'latitud',
+            'longitud',
             'fecha_de_reporte',
             'reportado_por'
         )
