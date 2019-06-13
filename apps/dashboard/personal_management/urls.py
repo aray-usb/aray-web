@@ -1,12 +1,40 @@
-"""
-URLs (routing) para el gestor de personal del dashboard
-"""
 
+from django.conf.urls import include
 from django.urls import path
-from . import views
+from .views import *
 
 app_name = "personal_management"
 
 urlpatterns = [
-    path('', views.PersonalView.as_view(), name="personal"),
+    path(
+        '',
+        IndexView.as_view(),
+        name='personal_index',
+    ),
+    path(
+        'crear_organizacion/',
+        OrganizacionCreateView.as_view(),
+        name='create_organization',
+    ),
+    path(
+        'borrar_organizacion/<int:pk>/',
+        OrganizacionDeleteView.as_view(),
+        name='delete_organization',
+    ),
+    path(
+        'organizacion/<int:pk>/',
+        OrganizacionDetailView.as_view(),
+        name='detail_organization',
+    ),
+    path(
+        'lista_organizaciones/',
+        OrganizacionListView.as_view(),
+        name='list',
+    ),
+    path(
+        'actualizar_organizacion/<int:pk>/',
+        OrganizacionUpdateView.as_view(),
+        name='update_organization',
+    ),
+
 ]

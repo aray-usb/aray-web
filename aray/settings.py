@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'apps.dashboard.assignments',
     'rest_framework',
     'rest_framework.authtoken',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
