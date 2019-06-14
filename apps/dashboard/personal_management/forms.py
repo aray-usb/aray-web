@@ -7,13 +7,23 @@ class OrganizacionCreateForm(forms.ModelForm):
 
     class Meta:
         model = Organizacion
-        fields = '__all__'
+        fields = (
+            'nombre',
+            'latitud',
+            'longitud',
+            'dirigida_por',
+        )
 
 class OrganizacionUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Organizacion
-        fields = '__all__'
+        fields = (
+            'nombre',
+            'latitud',
+            'longitud',
+            'dirigida_por',
+        )
 
 class VoluntarioCreateForm(forms.ModelForm):
 
