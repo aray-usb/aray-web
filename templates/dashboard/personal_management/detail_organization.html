@@ -88,10 +88,10 @@
                                         <img src="{% static 'img/faces-clipart/pic-1.png' %}" alt="image">
                                     </td>
                                     <td>
-                                        Herman Beck
+                                        {{ usuario.username }}   
                                     </td>
                                     <td>
-                                        $ 77.99
+                                        {{ usuario.email }}
                                     </td>
                                 </tr>
                             {% endfor %}

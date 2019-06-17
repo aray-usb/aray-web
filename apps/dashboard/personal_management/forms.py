@@ -5,6 +5,7 @@ from apps.api.models import Organizacion, Voluntario
 
 class OrganizacionForm(forms.ModelForm):
 
+    dirigida_por = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple)
     class Meta:
         model = Organizacion
         fields = '__all__'

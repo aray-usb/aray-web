@@ -1,0 +1,142 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Crear Tarea{% endblock %}
+
+{% block content %}
+
+    {% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }} 
+    {% endfor %}
+
+
+
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for error in form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-3">
+            <a  href="{% url 'dashboard:assignments:assignments_index' %}">
+                <button type="button" class="btn btn-icons btn-rounded btn-inverse-warning">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </a>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-aray mb-5">Crear Tarea</h2>
+                    <form method="POST" >
+                        {% csrf_token %}
+
+                        <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">{{ form.titulo.label }}</label>                        
+                            <div class="input-group">
+                                <div class="input-group-prepend bg-aray">
+                                    <span class="input-group-text bg-transparent">
+                                    <i class="fa fa-header text-white"></i>
+                                    </span>
+                                </div>
+                                {% render_field form.titulo class="form-control" placeholder="Titulo de la Tarea" aria-label="Tarea" aria-describedby="colored-addon1" %}
+                            </div>
+                            <p class="text-danger">{{form.titulo.errors.as_text}}</p>
+                        </div>
+
+                        <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">{{ form.descripcion.label }}</label>                        
+                            <div class="input-group">
+                                <div class="input-group-prepend bg-aray">
+                                    <span class="input-group-text bg-transparent">
+                                    <i class="fa fa-bars text-white"></i>
+                                    </span>
+                                </div>
+                                {% render_field form.titulo class="form-control" placeholder="Descripcion de la Tarea" aria-label="Descripcion" aria-describedby="colored-addon1" %}
+                            </div>
+                            <p class="text-danger">{{form.descripcion.errors.as_text}}</p>
+                        </div>
+ 
+
+                        <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">{{ form.fecha_limite.label }}</label>                        
+                            <div class="input-group">
+                                <div class="input-group-prepend bg-aray">
+                                    <span class="input-group-text bg-transparent">
+                                    <i class="fa fa-calendar text-white"></i>
+                                    </span>
+                                </div>
+                                {% render_field form.titulo class="form-control" placeholder="Fecha Limite" aria-label="Fecha Limite" aria-describedby="colored-addon1" %}
+                            </div>
+                            <p class="text-danger">{{form.fecha_limite.errors.as_text}}</p>
+                        </div>
+
+
+                        <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">{{ form.fecha_de_resolucion.label }}</label>                        
+                            <div class="input-group">
+                                <div class="input-group-prepend bg-aray">
+                                    <span class="input-group-text bg-transparent">
+                                    <i class="fa fa-calendar-o text-white"></i>
+                                    </span>
+                                </div>
+                                {% render_field form.titulo class="form-control" placeholder="Fecha de Resolucion" aria-label="Fecha de Resolucion" aria-describedby="colored-addon1" %}
+                            </div>
+                            <p class="text-danger">{{form.fecha_de_resolucion.errors.as_text}}</p>
+                        </div>
+
+                        <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">{{ form.estado.label }}</label>                        
+                            <div class="input-group">
+                                <div class="input-group-prepend bg-aray">
+                                    <span class="input-group-text bg-transparent">
+                                    <i class="fa fa-question-circle text-white"></i>
+                                    </span>
+                                </div>
+                                {% render_field form.titulo class="form-control" aria-label="Estado" aria-describedby="colored-addon1" %}
+                            </div>
+                            <p class="text-danger">{{form.estado.errors.as_text}}</p>
+                        </div>
+
+                        <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">{{ form.asignada_a.label }}</label>                        
+                            <div class="input-group">
+                                <div class="input-group-prepend bg-aray">
+                                    <span class="input-group-text bg-transparent">
+                                    <i class="fa fa-user text-white"></i>
+                                    </span>
+                                </div>
+                                {% render_field form.titulo class="form-control"  aria-label="Asignada a" aria-describedby="colored-addon1" %}
+                            </div>
+                            <p class="text-danger">{{form.asignada_a.errors.as_text}}</p>
+                        </div>
+
+                        <div class="form-group bmd-form-group">
+                            <label class="bmd-label-floating">{{ form.asignada_por.label }}</label>                        
+                            <div class="input-group">
+                                <div class="input-group-prepend bg-aray">
+                                    <span class="input-group-text bg-transparent">
+                                    <i class="fa fa-user text-white"></i>
+                                    </span>
+                                </div>
+                                {% render_field form.titulo class="form-control" aria-label="asignada_por" aria-describedby="colored-addon1" %}
+                            </div>
+                            <p class="text-danger">{{form.asignada_por.errors.as_text}}</p>
+                        </div>
+
+                        <br><br><button type="submit" class="btn btn-success btn-block">Agregar tarea</button>
+                                       
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+
+
+{% endblock %}
