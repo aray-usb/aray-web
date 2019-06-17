@@ -27,11 +27,6 @@ urlpatterns = [
         name='detail_organization',
     ),
     path(
-        'lista_organizaciones/',
-        OrganizacionListView.as_view(),
-        name='list',
-    ),
-    path(
         'actualizar_organizacion/<int:pk>/',
         OrganizacionUpdateView.as_view(),
         name='update_organization',

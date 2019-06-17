@@ -7439,6 +7439,7 @@ html {
   -ms-overflow-style: scrollbar;
   -webkit-tap-highlight-color: transparent; }
 
+  
 @-ms-viewport {
   width: device-width; }
 
@@ -16359,4 +16360,29 @@ ul {
   .error-page .error-page-divider {
     border-left: 3px solid rgba(255, 255, 255, 0.2); } }
 
-/*# sourceMappingURL=maps/style.css.map */
+.dataTables_wrapper div label select{
+  background-color: white;
+  color: gray;
+  border: 1px solid #f2f2f2;
+}
+
+.dataTables_length {
+  margin-top: 5%;
+}
+
+.dataTables_filter label {
+  display: flex;
+  margin-top: 8%;
+  margin-bottom: 0;
+}
+
+.button-aray {
+  background-image: -owg-linear-gradient(left, #FFBC4E 1%, #F07049 100%);
+  background-image: -webkit-linear-gradient(left, #FFBC4E 1%, #F07049 100%);
+  background-image: -moz-linear-gradient(left, #FFBC4E 1%, #F07049 100%);
+  background-image: -o-linear-gradient(left, #FFBC4E 1%, #F07049 100%);
+  background-image: linear-gradient(left, #FFBC4E 1%, #F07049 100%);
+  color: #ffffff;
+  border: none;
+}
+

@@ -1,0 +1,105 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Detalles de la Organización{% endblock %}
+
+{% block content %}
+
+
+    <div class="card" style="margin-bottom:5%;">
+        <div class="card-body">
+            <h1 class="text-aray">{{ organizacion.nombre }}</h1>
+            <p class="card-description">
+                Detalles de la organización No. {{ organizacion.pk }}
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 d-flex align-items-stretch grid-margin">
+            <div class="row flex-grow">
+                <div class="col-12">
+                    <div class="card">
+                       <div class="card-body">
+                            <h3 class="text-gray">Latitud</h3>
+                            <br>
+                            <div class="media">
+                                <i class="fa fa-globe fa-5x text-aray d-flex align-self-start mr-3"></i>
+                                <div class="media-body">
+                                <p class="card-text">La latidud de esta organización es: {{ organizacion.latitud }}.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="text-gray">Longitud</h3>
+                            <br>
+                            <div class="media">
+                                <i class="fa fa-globe fa-5x text-aray d-flex align-self-start mr-3"></i>
+                                <div class="media-body">
+                                <p class="card-text">La longitud de esta organización es: {{ organizacion.longitud }}.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="text-gray">Radio</h3>
+                            <br>
+                            <div class="media">
+                                <i class="fa fa-circle-o fa-5x text-aray d-flex align-self-start mr-3"></i>
+                                <div class="media-body">
+                                <p class="card-text">El radio en metros de esta organización es: {{ organizacion.radio }}.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-gray"> Voluntarios Asociados </h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Usuario
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Correo Electrónico
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for usuario in organizacion.dirigida_por.all %}
+                                <tr>
+                                    <td class="py-1">
+                                        <img src="{% static 'img/faces-clipart/pic-1.png' %}" alt="image">
+                                    </td>
+                                    <td>
+                                        Herman Beck
+                                    </td>
+                                    <td>
+                                        $ 77.99
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

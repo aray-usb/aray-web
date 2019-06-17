@@ -1,13 +1,20 @@
-"""
-URLs (routing) para el gestor de recursos del dashboard
-"""
-
+from django.conf.urls import include
 from django.urls import path
-from . import views
+from .views import ResourcesIndexView, ResourcesCreateView
 
 app_name = "resources_management"
 
 urlpatterns = [
-    path('', views.ResourcesView.as_view(), name="resources"),
-    path('anadir/', views.AddResource.as_view(), name='add'),
+    path(
+        '',
+        ResourcesIndexView.as_view(),
+        name='resources_index',
+    ),
+    path(
+        'crear_recurso/',
+        ResourcesCreateView.as_view(),
+        name='create_resource',
+    ),
+
 ]
+

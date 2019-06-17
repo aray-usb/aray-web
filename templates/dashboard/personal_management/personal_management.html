@@ -1,62 +1,217 @@
 {% extends 'dashboard/base.html' %}
 {% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/jquery.dataTables.css' %}">
+{% endblock %}
 
 {% block title %}Manejo de Personal{% endblock %}
 
 {% block content %}
-
+    
     <div class="row purchace-popup">
-
         <div class="col-12">
             <span class="d-block d-md-flex align-items-center">
                 <p class="text-gray" style="margin-right:5%;font-size:20px;">Organizaciones de Atención a Emergencias</p>
                 <a class="btn purchase-button mt-4 mt-md-0" href="{% url 'dashboard:personal_management:create_organization' %}">Agregar Organización</a>
             </span>
         </div>
+    </div>
+
+    <div class="row">
+        
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div style="display:flex;" ><i style="margin-top:5%;margin-left:5%; margin-right: 5%;" class="fa fa-users fa-2x text-gray" ></i><h3 class="text-gray mb-5" style="margin-top:5%;">Organizaciones</h3></div>
+
+                <div class="card-body" style="padding-top:0;">
+                    {% if organizaciones.count > 0 %}
+                    <table id="tablaOrganizaciones" class="display">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Latitud</th>
+                                <th>Longitud</th>
+                                <th>Radio</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for organizacion in organizaciones %}
+                            <tr>
+                                <td>{{ organizacion.nombre }}</td>
+                                <td>{{ organizacion.latitud }}</td>
+                                <td>{{ organizacion.longitud }}</td>
+                                <td>{{ organizacion.radio }}</td>
+                                <td>
+                                    
+                                    <a class="nav-link count-indicator " id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <button type="button" class="btn btn-icons btn-rounded btn-inverse-warning">
+                                            <i class="fa fa-gear"></i>
+                                        </button>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                                        <div class="dropdown-item">
+                                            <p class="mb-0 text-muted">Acciones</p>
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url "dashboard:personal_management:detail_organization"  organizacion.id %}">Detalles</a>
+                                        <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url "dashboard:personal_management:update_organization"  organizacion.id %}">Actualizar </a>
+                                        <div class="dropdown-divider"></div>
+                                            <a class="delete-modal dropdown-item" href="{% url "dashboard:personal_management:delete_organization"  organizacion.id %}" data-toggle="modal" data-target="#deleteOrg">Borrar</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <p>No existen organizaciones agregadas a la base de datos</p>
+                    {% endif %}
+                </div>
 
 
+            </div>
+        </div>
+    </div>
+
+    <div class="row purchace-popup">
         <div class="col-12">
             <span class="d-block d-md-flex align-items-center">
                 <p class="text-gray" style="margin-right:5%;font-size:20px;">Personal de Atención de Emergencias</p>
-                <a class="btn purchase-button mt-4 mt-md-0" href="#" target="_blank">Agregar Personal</a>
+                <a class="btn purchase-button mt-4 mt-md-0" href="#" target="_blank">Agregar Voluntario</a>
             </span>
         </div>
     </div>
+
     <div class="row">
+        
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
-                <div class="card-body">
-                    <div class="row"><i class="fa fa-users fa-2x text-gray" style="margin-left:3%;margin-right:3%;"></i><h3 class="text-gray mb-5">Personal</h3></div>
+                <div style="display:flex;" ><i style="margin-top:5%;margin-left:5%; margin-right: 5%;" class="fa fa-user fa-2x text-gray" ></i><h3 class="text-gray mb-5" style="margin-top:5%;">Voluntarios</h3></div>
 
-                    <div class="table-responsive">
-                        <table id="dtDashboard" class="table table-striped table-sm text-center table-hover" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th class="th-sm font-weight-bold">aaa</th>
-                                    <th class="th-sm font-weight-bold">bbb</th>
-                                    <th class="th-sm font-weight-bold">ccc</th>
-                                    <th class="th-sm font-weight-bold">ddd</th>
-                                    <th class="th-sm font-weight-bold">eee</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-
-                                <tr>
-                                    <td>test</td>
-                                    <td>xx</td>
-                                    <td>2019-02-09 22:21:05</td>
-                                    <td>None</td>
-                                    <td>None</td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="card-body" style="padding-top:0;">
+                    {% if voluntarios.count > 0 %}
+                    <table id="tablaVoluntarios" class="display">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Latitud</th>
+                                <th>Longitud</th>
+                                <th>Radio</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for organizacion in organizaciones %}
+                            <tr>
+                                <td>{{ organizacion.nombre }}</td>
+                                <td>{{ organizacion.latitud }}</td>
+                                <td>{{ organizacion.longitud }}</td>
+                                <td>{{ organizacion.radio }}</td>
+                                <td>
+                                    
+                                    <a class="nav-link count-indicator " id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <button type="button" class="btn btn-icons btn-rounded btn-inverse-warning">
+                                            <i class="fa fa-gear"></i>
+                                        </button>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                                        <div class="dropdown-item">
+                                            <p class="mb-0 text-muted">Acciones</p>
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url "dashboard:personal_management:detail_organization"  organizacion.id %}">Detalles</a>
+                                        <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url "dashboard:personal_management:update_organization"  organizacion.id %}">Actualizar </a>
+                                        <div class="dropdown-divider"></div>
+                                            <a class="delete-modal dropdown-item" href="{% url "dashboard:personal_management:delete_organization"  organizacion.id %}" data-toggle="modal" data-target="#deleteOrg">Borrar</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <p>No existen voluntarios agregados a la base de datos</p>
+                    {% endif %}
                 </div>
+
+
             </div>
         </div>
     </div>
 
 
+    <!-- Modal -->
+    <div class="modal fade" id="deleteOrg" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-aray">Nombre</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de querer eliminar esta organización?</p>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <button class="btn button-aray float-right">Delete</button>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+{% endblock %}
+
+<!--BLOQUE DE JS-->
+
+{% block js %}
+<script src="{% static 'js/jquery.dataTables.js' %}"></script>
+<script>
+  $(document).ready( function () {
+    $('#tablaOrganizaciones').DataTable({
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+      }
+    });
+    $('#tablaVoluntarios').DataTable({
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+      }
+    });
+  });
+
+  // Get the modal
+var modal = document.getElementById("modal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("delete-modal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 {% endblock %}

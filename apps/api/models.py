@@ -86,12 +86,6 @@ class Voluntario(models.Model):
         verbose_name="Usuario asociado"
     )
 
-    organizaciones = models.ManyToManyField(
-        "Organizacion",
-        related_name="voluntarios",
-        verbose_name="Organizaciones asociadas"
-    )
-
     # El número de teléfono usa un validador personalizado
     telefono = models.CharField(
         max_length=15,
@@ -461,17 +455,17 @@ class Recurso(models.Model):
         verbose_name="Nombre"
     )
 
-    # Posibles tipos de recursos
-    # TODO: Refinar lista de tipos posibles
-    TIPO_SALUD = 0
+    TIPO_MEDICINAS = 0
     TIPO_ALIMENTACION = 1
     TIPO_TRANSPORTE = 2
+    TIPO_ARTICULO_RESCATE = 3
     TIPO_OTROS = 999
 
     TIPO_CHOICES = (
-        (TIPO_SALUD, "Salud"),
+        (TIPO_MEDICINAS, "Medicinas"),
         (TIPO_ALIMENTACION, "Alimentación"),
-        (TIPO_TRANSPORTE, "Transporte"),
+        (TIPO_TRANSPORTE, "Vehículo"),
+        (TIPO_ARTICULO_RESCATE, "Articulos de Rescate"),
         (TIPO_OTROS, "Otros"),
     )
 
@@ -481,12 +475,23 @@ class Recurso(models.Model):
         verbose_name="Tipo"
     )
 
+    fecha_compra = models.DateTimeField(
+        verbose_name="Fecha de Compra",
+        blank=True,
+        null=True
+    )
+
+    cantidad = models.IntegerField(
+        default=1,
+        verbose_name="Cantidad"
+    )
+
+
     def __str__(self):
         """
         Retorna una representación como cadena de caracteres
         del recurso.
         """
-
         return "{0} ({1})".format(
             self.nombre,
             self.get_tipo_display()
