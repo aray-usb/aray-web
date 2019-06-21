@@ -67,12 +67,17 @@ class ReporteViewSet(mixins.RetrieveModelMixin,
                 pk=incidencia_id
             )
 
+        try:
+            voluntario = request.user.voluntario
+        except:
+            voluntario = None
+
         reporte = Reporte(
             latitud=decimal.Decimal(request.data['latitud']),
             longitud=decimal.Decimal(request.data['longitud']),
             incidencia=incidencia,
             contenido=request.data['contenido'],
-            reportado_por=request.user.voluntario
+            reportado_por=voluntario
         )
         reporte.save()
 
