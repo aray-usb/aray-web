@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html class="no-js css-menubar" lang="es">
     <head>
         <meta charset="utf-8" />
@@ -71,6 +72,15 @@
         </div>
 
         <!-- Archivos JS -->
+        <script>
+            {% if messages %}
+                {% for message in messages %}
+                    alert(message);
+                {% endfor %}
+            {% endif %}
+        </script>
+
+
         <script src="{% static 'js/jquery.min.js' %}" charset="utf8"></script>
         <script src="{% static 'js/toastr.min.js' %}" charset="utf8"></script>
         <script src="{% static 'js/auth.js' %}" type="text/javascript"></script>

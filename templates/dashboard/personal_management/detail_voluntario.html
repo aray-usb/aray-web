@@ -1,0 +1,58 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Detalles de la Organización{% endblock %}
+
+{% block content %}
+
+    <div class="card" style="margin-bottom:5%;">
+        <div class="card-body">
+            <div class="float-right">
+                <a  href="{% url 'dashboard:personal_management:personal_index' %}">
+                    <button type="button" class="btn btn-icons btn-rounded btn-inverse-warning">
+                        <i class="fa fa-arrow-left"></i>
+                    </button>
+                </a>
+            </div>
+            <div>
+                <h1 class="text-aray"> Detalles del Voluntario No. {{ voluntario.pk }} </h1>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-4">
+            <div class="card card-statistics" style="background-color:#F07049; border-radius: 100px 10px 10px 10px;-moz-border-radius: 100px 10px 10px 10px;-webkit-border-radius: 100px 10px 10px 10px;">
+                <div class="card-body">
+                    <div class="clearfix">
+                        <div class="float-left">
+                        <i class="fa fa-id-card fa-5x text-white"></i>
+                        </div>
+                        <div class="float-right">
+                        <p class="mb-0 text-right text-white">Voluntario</p>
+                        <div class="fluid-container">
+                            <h3 class="font-weight-medium text-right text-white mb-0"> {{ voluntario.usuario.username }} </h3>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-8">
+            <div class="card" style="border-radius: 20px 20px 20px 20px;-moz-border-radius: 20px 30px 20px 10px;-webkit-border-radius: 20px 20px 20px 20px;">
+                <div class="card-body">
+                    <h3 class="text-aray"> Documento de Identidad: </h3><h3 class="text-gray"> {{ voluntario.identificacion }} </h3><br>
+                    <h3 class="text-aray"> Email: </h3><h3 class="text-gray"> {{ voluntario.email }} </h3><br>
+                    <h3 class="text-aray"> Teléfono: </h3><h3 class="text-gray"> {{ voluntario.telefono }} </h3><br>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

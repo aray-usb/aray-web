@@ -9,10 +9,20 @@
 
     <div class="card" style="margin-bottom:5%;">
         <div class="card-body">
-            <h1 class="text-aray">{{ organizacion.nombre }}</h1>
-            <p class="card-description">
-                Detalles de la organización No. {{ organizacion.pk }}
-            </p>
+            <div class="float-right">
+                <a  href="{% url 'dashboard:personal_management:personal_index' %}">
+                    <button type="button" class="btn btn-icons btn-rounded btn-inverse-warning">
+                        <i class="fa fa-arrow-left"></i>
+                    </button>
+                </a>
+            </div>
+            <div>
+                <h1 class="text-aray">{{ organizacion.nombre }}</h1>
+                <p class="card-description">
+                    Detalles de la organización No. {{ organizacion.pk }}
+                </p>
+            </div>
+
         </div>
     </div>
 
@@ -82,16 +92,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for usuario in organizacion.dirigida_por.all %}
+                            {{organizacion}}
+                            {% for voluntario in organizacion.dirigida_por.all %}
+                             {{usuario}}
                                 <tr>
                                     <td class="py-1">
                                         <img src="{% static 'img/faces-clipart/pic-1.png' %}" alt="image">
                                     </td>
                                     <td>
-                                        {{ usuario.username }}   
+                                        {{ voluntario.usuario.username }}   
                                     </td>
                                     <td>
-                                        {{ usuario.email }}
+                                        {{ voluntario.usuario.email }}
                                     </td>
                                 </tr>
                             {% endfor %}

@@ -70,7 +70,7 @@
                                     <i class="fa fa-calendar text-white"></i>
                                     </span>
                                 </div>
-                                {% render_field form.titulo class="form-control" placeholder="Fecha Limite" aria-label="Fecha Limite" aria-describedby="colored-addon1" %}
+                                {% render_field form.fecha_limite class="form-control" placeholder="Fecha Limite" aria-label="Fecha Limite" aria-describedby="colored-addon1" %}
                             </div>
                             <p class="text-danger">{{form.fecha_limite.errors.as_text}}</p>
                         </div>
@@ -84,7 +84,7 @@
                                     <i class="fa fa-calendar-o text-white"></i>
                                     </span>
                                 </div>
-                                {% render_field form.titulo class="form-control" placeholder="Fecha de Resolucion" aria-label="Fecha de Resolucion" aria-describedby="colored-addon1" %}
+                                {% render_field form.fecha_de_resolucion class="form-control" placeholder="Fecha de Resolucion" aria-label="Fecha de Resolucion" aria-describedby="colored-addon1" %}
                             </div>
                             <p class="text-danger">{{form.fecha_de_resolucion.errors.as_text}}</p>
                         </div>
@@ -138,5 +138,15 @@
     </div>
 
 
+<script>
+  $(function() {
+    $( ".datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1900:2012",
+      // You can put more options here.
 
+    });
+  });
+</script>
 {% endblock %}

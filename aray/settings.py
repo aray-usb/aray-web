@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'widget_tweaks',
+    'bootstrap_datepicker_plus',
 ]
 
 MIDDLEWARE = [
@@ -207,6 +208,12 @@ EMAIL_HOST = os.environ.get('ARAY_EMAIL_HOST', "")
 EMAIL_HOST_USER = os.environ.get('ARAY_EMAIL_USER', "")
 EMAIL_HOST_PASSWORD = os.environ.get('ARAY_EMAIL_PASSWORD', "")
 EMAIL_PORT = 587
+
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
+
 
 # Log de errores para Heroku
 LOGGING = {

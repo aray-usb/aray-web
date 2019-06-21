@@ -2,7 +2,7 @@
 {% load static %}
 {% load widget_tweaks %}
 
-{% block title %}Crear Organizacion{% endblock %}
+{% block title %}Crear Voluntario{% endblock %}
 
 {% block content %}
 
@@ -31,73 +31,63 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title text-aray mb-5">Crear Organización</h2>
+                    <h2 class="card-title text-aray mb-5">Crear Voluntario</h2>
                     <form method="POST" >
                         {% csrf_token %}
 
                         <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">{{ form.nombre.label }}</label>                        
+                            <label class="bmd-label-floating">{{ form.usuario.label }}</label>                        
                             <div class="input-group">
                                 <div class="input-group-prepend bg-aray">
                                     <span class="input-group-text bg-transparent">
                                     <i class="fa fa-id-card text-white"></i>
                                     </span>
                                 </div>
-                                {% render_field form.nombre class="form-control" placeholder="Nombre de la Organizacion" aria-label="Nombre" aria-describedby="colored-addon1" %}
+                                {% render_field form.usuario class="form-control" placeholder="Usuario Asociado" aria-label="Usuario" aria-describedby="colored-addon1" %}
                             </div>
-                            <p class="text-danger">{{form.nombre.errors.as_text}}</p>
+                            <p class="text-danger">{{form.usuario.errors.as_text}}</p>
                         </div>
 
                         <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">{{ form.latitud.label }}</label>                        
+                            <label class="bmd-label-floating">{{ form.telefono.label }}</label>                        
                             <div class="input-group">
                                 <div class="input-group-prepend bg-aray">
                                     <span class="input-group-text bg-transparent">
                                     <i class="fa fa-map-marker text-white"></i>
                                     </span>
                                 </div>
-                                {% render_field form.latitud class="form-control" placeholder="Latitud" aria-label="Latitud" aria-describedby="colored-addon1" %}
+                                {% render_field form.telefono class="form-control" placeholder="Telefono" aria-label="Telefono" aria-describedby="colored-addon1" %}
                             </div>
-                            <p class="text-danger">{{form.latitud.errors.as_text}}</p>
+                            <p class="text-danger">{{form.telefono.errors.as_text}}</p>
                         </div>
 
                         <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">{{ form.longitud.label }}</label>                        
+                            <label class="bmd-label-floating">{{ form.tipo_identidad.label }}</label>                        
                             <div class="input-group">
                                 <div class="input-group-prepend bg-aray">
                                     <span class="input-group-text bg-transparent">
                                     <i class="fa fa-map-marker text-white"></i>
                                     </span>
                                 </div>
-                                {% render_field form.longitud class="form-control" placeholder="Longitud" aria-label="Longitud" aria-describedby="colored-addon1" %}
+                                {% render_field form.tipo_identidad class="form-control" placeholder="Tipo Identidad" aria-label="Tipo Identidad" aria-describedby="colored-addon1" %}
                             </div>
-                            <span class="text-danger">{{form.longitud.errors.as_text}}</span>
+                            <span class="text-danger">{{form.tipo_identidad.errors.as_text}}</span>
                         </div>
 
                         <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">{{ form.radio.label }}</label>                        
+                            <label class="bmd-label-floating">{{ form.nro_identidad.label }}</label>                        
                             <div class="input-group">
                                 <div class="input-group-prepend bg-aray">
                                     <span class="input-group-text bg-transparent">
                                     <i class="fa fa-circle-o text-white"></i>
                                     </span>
                                 </div>
-                                {% render_field form.radio class="form-control" placeholder="Radio (en metros)" aria-label="Radio" aria-describedby="colored-addon1" %}
+                                {% render_field form.nro_identidad class="form-control" placeholder="Numero de Identidad" aria-label="Numero de Identidad" aria-describedby="colored-addon1" %}
                             </div>
-                            <span class="text-danger">{{form.radio.errors.as_text}}</span>
+                            <span class="text-danger">{{form.nro_identidad.errors.as_text}}</span>
                         </div>
 
-
-                        <div class="form-group">
-                            <div class="form-check form-check-flat">
-                                <label >{{form.dirigida_por.label}}
-                                    {% render_field form.dirigida_por type="checkbox" class="form-check-input" %}
-                                    <i class="input-helper"></i>
-                                </label>
-                            </div>
-                        </div>     
-
-                        <br><br><button type="submit" class="btn btn-success btn-block">Agregar Organizacion</button>
+                        <br><br><button type="submit" class="btn btn-success btn-block">Agregar Voluntario</button>
                                        
                     </form>
                 </div>

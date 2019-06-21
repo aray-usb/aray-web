@@ -58,7 +58,7 @@
                                         <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="{% url "dashboard:personal_management:update_organization"  organizacion.id %}">Actualizar </a>
                                         <div class="dropdown-divider"></div>
-                                            <a class="delete-modal dropdown-item" href="{% url "dashboard:personal_management:delete_organization"  organizacion.id %}" data-toggle="modal" data-target="#deleteOrg">Borrar</a>
+                                            <a class="delete-modal dropdown-item" href="{% url "dashboard:personal_management:delete_organization"  organizacion.id %}" id="delete_org" data-toggle="modal" data-target="#deleteOrg">Borrar</a>
                                         </div>
                                     </div>
                                 </td>
@@ -80,7 +80,7 @@
         <div class="col-12">
             <span class="d-block d-md-flex align-items-center">
                 <p class="text-gray" style="margin-right:5%;font-size:20px;">Personal de Atención de Emergencias</p>
-                <a class="btn purchase-button mt-4 mt-md-0" href="#" target="_blank">Agregar Voluntario</a>
+                <a class="btn purchase-button mt-4 mt-md-0" href="{% url 'dashboard:personal_management:create_v' %}">Agregar Voluntario</a>
             </span>
         </div>
     </div>
@@ -90,26 +90,25 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div style="display:flex;" ><i style="margin-top:5%;margin-left:5%; margin-right: 5%;" class="fa fa-user fa-2x text-gray" ></i><h3 class="text-gray mb-5" style="margin-top:5%;">Voluntarios</h3></div>
-
                 <div class="card-body" style="padding-top:0;">
                     {% if voluntarios.count > 0 %}
                     <table id="tablaVoluntarios" class="display">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Latitud</th>
-                                <th>Longitud</th>
-                                <th>Radio</th>
-                                <th>Acciones</th>
+                                <th> Usuario Asociado </td>
+                                <th> Teléfono </td>
+                                <th> Documento de Identidad </td>
+                                <th> Email </td>
+                                <th> Acciones </td>
                             </tr>
                         </thead>
                         <tbody>
-                        {% for organizacion in organizaciones %}
+                        {% for voluntario in voluntarios %}
                             <tr>
-                                <td>{{ organizacion.nombre }}</td>
-                                <td>{{ organizacion.latitud }}</td>
-                                <td>{{ organizacion.longitud }}</td>
-                                <td>{{ organizacion.radio }}</td>
+                                <td> {{ voluntario.usuario.username }} </td>
+                                <td> {{ voluntario.telefono }} </td>
+                                <td> {{ voluntario.identificacion }} </td>
+                                <td> {{ voluntario.usuario.email }} </td>
                                 <td>
                                     
                                     <a class="nav-link count-indicator " id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -122,11 +121,11 @@
                                             <p class="mb-0 text-muted">Acciones</p>
                                         </div>
                                         <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="{% url "dashboard:personal_management:detail_organization"  organizacion.id %}">Detalles</a>
+                                            <a class="dropdown-item" href="{% url "dashboard:personal_management:detail_v" voluntario.id %}">Detalles</a>
                                         <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="{% url "dashboard:personal_management:update_organization"  organizacion.id %}">Actualizar </a>
+                                            <a class="dropdown-item" href="{% url "dashboard:personal_management:update_v" voluntario.id %}">Actualizar </a>
                                         <div class="dropdown-divider"></div>
-                                            <a class="delete-modal dropdown-item" href="{% url "dashboard:personal_management:delete_organization"  organizacion.id %}" data-toggle="modal" data-target="#deleteOrg">Borrar</a>
+                                            <a class="delete-modal dropdown-item" href="{% url "dashboard:personal_management:delete_v"  voluntario.id %}" id="delete_vol" data-toggle="modal" data-target="#deleteVol">Borrar</a>
                                         </div>
                                     </div>
                                 </td>
@@ -160,13 +159,37 @@
                     <p>¿Estás seguro de querer eliminar esta organización?</p>
                     <form action="" method="POST">
                         {% csrf_token %}
-                        <button class="btn button-aray float-right">Delete</button>
+                        <button class="btn button-aray float-right">Eliminar</button>
                     </form>
                 </div>
             </div>
             
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteVol" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-aray">Nombre</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de querer eliminar este Voluntario?</p>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <button class="btn button-aray float-right">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
 
 {% endblock %}
 
@@ -207,11 +230,15 @@ span.onclick = function() {
   modal.style.display = "none";
 }
 
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
 }
+
+
+    
 </script>
 {% endblock %}

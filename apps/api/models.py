@@ -166,12 +166,11 @@ class Voluntario(models.Model):
         """
         Retorna una representación como string del Voluntario.
         """
-
-        return "{0} {1}".format(
-            self.nombre,
-            self.apellido
-        )
-
+        if self.usuario.first_name and self.usuario.last_name:
+            return "{0} {1}".format(self.usuario.first_name, self.usuario.last_name)
+        else:
+            return self.usuario.username
+            
 class Tarea(models.Model):
     """
     Representa una tarea asignada a un usuario.

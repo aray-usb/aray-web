@@ -32,4 +32,26 @@ urlpatterns = [
         name='update_organization',
     ),
 
+
+    path(
+        'crear_voluntario/',
+        VoluntarioCreateView.as_view(),
+        name='create_v',
+    ),
+    path(
+        'borrar_voluntario/<int:pk>/',
+        VoluntarioDeleteView.as_view(),
+        name='delete_v',
+    ),
+    path(
+        'voluntario/<int:pk>/',
+        VoluntarioDetailView.as_view(),
+        name='detail_v',
+    ),
+    path(
+        'actualizar_voluntario/<int:pk>/',
+        VoluntarioUpdateView.as_view(),
+        name='update_v',
+    ),
+
 ]

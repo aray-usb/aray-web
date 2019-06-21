@@ -37,8 +37,9 @@ def register_process(request):
     form = UserCreationForm(data=request.POST)
     if form.is_valid():
         user = form.save(commit=False)
-        user.is_active = False
+        # user.is_active = False
         user.save()
+        """
         current_site = get_current_site(request)
         message = render_to_string('accounts/activation.html', {
             'user':user,
@@ -51,9 +52,10 @@ def register_process(request):
         email = EmailMessage(mail_subject, message, to=[to_email])
         email.send()
         return HttpResponse('Please confirm your email address to complete the registration')
+        """
     else:
-        print(form.errors)
-        print('yujuuu')
+        messages.error(request, 'Credenciales introducidas incorrectas, intente de nuevo.')
+        
 
     return render(request, 'accounts/auth.html', {'form': form})
 
@@ -69,8 +71,7 @@ def login_process(request):
 
         return redirect(next_url)
     else:
-        print('no lo logramos :(')
-        #messages.error(request, 'Document deleted.')
+        messages.error(request, 'Credenciales introducidas incorrectas, intente de nuevo.')
 
 def auth(request):
     """

@@ -22,6 +22,7 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["organizaciones"] =  Organizacion.objects.all()
+        context["voluntarios"] = Voluntario.objects.all()
         return context
 
 class OrganizacionCreateView(CreateView):
@@ -49,6 +50,33 @@ class OrganizacionUpdateView(UpdateView):
     model = Organizacion
     queryset = Organizacion.objects.all()
     template_name = 'dashboard/personal_management/update_organization.html'
+    success_url = reverse_lazy('dashboard:personal_management:personal_index')
+
+class VoluntarioCreateView(CreateView):
+    form_class = VoluntarioForm
+    model = Voluntario
+    queryset = Voluntario.objects.all()
+    template_name = 'dashboard/personal_management/create_voluntario.html'
+    success_url = reverse_lazy('dashboard:personal_management:personal_index')
+
+class VoluntarioDeleteView(DeleteView):
+    context_object_name = 'voluntario'
+    model = Voluntario
+    template_name = 'dashboard/personal_management/delete_voluntario.html'
+    success_url = reverse_lazy('dashboard:personal_management:personal_index')
+
+class VoluntarioDetailView(DetailView):
+    context_object_name = 'voluntario'
+    model = Voluntario
+    queryset = Voluntario.objects.all()
+    template_name = 'dashboard/personal_management/detail_voluntario.html'
+    http_method_names = ['get']
+
+class VoluntarioUpdateView(UpdateView):
+    form_class = VoluntarioForm
+    model = Voluntario
+    queryset = Voluntario.objects.all()
+    template_name = 'dashboard/personal_management/update_voluntario.html'
     success_url = reverse_lazy('dashboard:personal_management:personal_index')
 
 
