@@ -95,7 +95,8 @@ class ReporteSerializer(serializers.HyperlinkedModelSerializer):
             'latitud',
             'longitud',
             'fecha_de_reporte',
-            'reportado_por'
+            'reportado_por',
+            'es_solicitud_de_ayuda',
         )
 
 class TareaSerializer(serializers.HyperlinkedModelSerializer):

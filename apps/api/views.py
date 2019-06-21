@@ -78,7 +78,8 @@ class ReporteViewSet(mixins.RetrieveModelMixin,
             longitud=decimal.Decimal(request.data['longitud']),
             incidencia=incidencia,
             contenido=request.data['contenido'],
-            reportado_por=voluntario
+            reportado_por=voluntario,
+            es_solicitud_de_ayuda=bool(request.data['es_solicitud_de_ayuda'])
         )
         reporte.save()
 

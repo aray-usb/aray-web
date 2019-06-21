@@ -374,6 +374,11 @@ class Reporte(GeoModelo):
         auto_now_add=True
     )
 
+    es_solicitud_de_ayuda = models.BooleanField(
+        default=False,
+        verbose_name="¿Es una solicitud de ayuda?"
+    )
+
     # Si el reporte lo generó algún voluntario, lo guardamos para futuros usos
     reportado_por = models.ForeignKey(
         Voluntario,
