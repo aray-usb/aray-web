@@ -1,7 +1,7 @@
 {% extends 'dashboard/base.html' %}
 
 {% block title %}Lista de Tareas{% endblock %}
- href="{% url 'dashboard:resources_management:add' %}" 
+
 {% block content %}
 
 <div class="row">
@@ -54,11 +54,11 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">
                                     <i class="fa fa-check text-success fa-fw"></i>Marcar como listo</a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fa fa-trash-o text-gray fa-fw"></i>Detalles de la tarea</a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{% url "dashboard:assignments:detail_assignment" tarea.id %}">
+                                    <i class="fa fa-eye text-gray fa-fw"></i>Detalles de la tarea</a>
+                                <a class="dropdown-item" href="{% url "dashboard:assignments:update_assignment" tarea.id %}">
                                     <i class="fa fa-edit text-gray fa-fw"></i>Editar tarea</a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{% url "dashboard:assignments:delete_assignment"  tarea.id %}" id="delete" data-toggle="modal" data-target="#delete">
                                     <i class="fa fa-trash-o text-danger fa-fw"></i>Eliminar tarea</a>
                             </div>
                         </div>
@@ -71,4 +71,66 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="delete" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-aray">Nombre</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de querer eliminar esta tarea?</p>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <button class="btn button-aray float-right">Eliminar</button>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}
+
+<!--BLOQUE DE JS-->
+
+{% block js %}
+
+<script>
+
+    // Get the modal
+    var modal = document.getElementById("modal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("delete-modal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal 
+    btn.onclick = function() {
+    modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+    modal.style.display = "none";
+    }
+
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+    
+</script>
 {% endblock %}

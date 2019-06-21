@@ -1,0 +1,118 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Detalles de la Organización{% endblock %}
+
+{% block content %}
+
+    <div class="card" style="margin-bottom:5%;">
+        <div class="card-body">
+            <div class="float-right">
+                <a  href="{% url 'dashboard:assignments:assignments_index' %}">
+                    <button type="button" class="btn btn-icons btn-rounded btn-inverse-warning">
+                        <i class="fa fa-arrow-left"></i>
+                    </button>
+                </a>
+            </div>
+            <div>
+                <h1 class="text-aray"> {{ tarea.titulo }} </h1>
+                <p class="card-description"> Detalles de la Tarea No. {{ tarea.pk }} </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class='col-4'>
+            <div class="card" style="border-radius: 20px 20px 20px 20px;-moz-border-radius: 20px 30px 20px 10px;-webkit-border-radius: 20px 20px 20px 20px;">
+                <div class="card-body">
+                    <h4 style="vertical-align:middle;text-align:center">
+                        {{ tarea.descripcion }}
+                    </h4>
+                </div>
+            </div>
+        </div>
+
+        <div class='col-4'>
+            <div class="card" style="border-radius: 20px 20px 20px 20px;-moz-border-radius: 20px 30px 20px 10px;-webkit-border-radius: 20px 20px 20px 20px;">
+                <div class="card-body" style="display:flex;">
+                    {% if tarea.estado == 0 %}
+                        <i class="fa fa-circle-o fa-5x text-aray" style="margin-right:7%"><h6 style="text-align:center; text-aray">Nueva</h6></i><br>
+                    {% else %}
+                        <i class="fa fa-circle-o fa-5x" style="margin-right:7%"><h6 style="text-align:center;">Nueva</h6></i><br>
+                    {% endif %}
+
+                    {% if tarea.estado == 1 %}
+                        <i class="fa fa-circle-o fa-5x text-aray" style="margin-right:5%"><h6 style="text-align:center; text-aray">En Progreso</h6></i><br>
+                    {% else %}
+                        <i class="fa fa-circle-o fa-5x" style="margin-right:5%"><h6 style="text-align:center;">En Progreso</h6></i><br>
+                    {% endif %}
+
+                    {% if tarea.estado == 2 %}
+                        <i class="fa fa-circle-o fa-5x text-aray" style="margin-right:5%"><h6 style="text-align:center; text-aray">Resuelta</h6></i><br>
+                    {% else %}
+                        <i class="fa fa-circle-o fa-5x" style="margin-right:5%"><h6 style="text-align:center;">Resuelta</h6></i><br>
+                    {% endif %}
+
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class='col-4'>
+            <div class="card" style="border-radius: 20px 20px 20px 20px;-moz-border-radius: 20px 30px 20px 10px;-webkit-border-radius: 20px 20px 20px 20px;">
+                <div class="card-body">
+                    <h4 style="vertical-align:middle;">
+                        Fecha Limite: {{ tarea.fecha_limite }}
+                    </h4><br>
+                    {% if tarea.estado == 2 %}
+                        <h4 style="vertical-align:middle;">
+                            Fecha de Resolucion: {{ tarea.fecha_de_resolucion }}
+                        </h4>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <br><br>
+    <div class='row'>
+        <div class="col-6">
+            <div class="card card-statistics" style="background-color:#F07049; border-radius: 100px 10px 10px 10px;-moz-border-radius: 100px 10px 10px 10px;-webkit-border-radius: 100px 10px 10px 10px;">
+                <div class="card-body">
+                    <div class="clearfix">
+                        <div class="float-left">
+                        <i class="fa fa-id-card fa-5x text-white"></i>
+                        </div>
+                        <div class="float-right">
+                        <p class="mb-0 text-right text-white">Tarea Asignada a:</p>
+                        <div class="fluid-container">
+                            <h3 class="font-weight-medium text-right text-white mb-0"> {{ voluntario.asignada_a.usuario.username }} </h3>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card card-statistics" style="background-color:#F07049; border-radius: 10px 100px 10px 10px;-moz-border-radius: 10px 100px 10px 10px;-webkit-border-radius: 10px 100px 10px 10px;">
+                <div class="card-body">
+                    <div class="clearfix">
+                        <div class="float-left">
+                        <i class="fa fa-id-card fa-5x text-white"></i>
+                        </div>
+                        <div class="float-right">
+                        <p class="mb-0 text-right text-white">Tarea Asignada por:</p>
+                        <div class="fluid-container">
+                            <h3 class="font-weight-medium text-right text-white mb-0"> {{ voluntario.asignada_por.usuario.username }} </h3>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

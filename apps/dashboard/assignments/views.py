@@ -29,19 +29,19 @@ class TareaCreateView(CreateView):
     model = Tarea
     queryset = Tarea.objects.all()
     template_name = 'dashboard/assignments/create_assignment.html'
-    success_url = reverse_lazy('dashboard:personal_management:assignments')
+    success_url = reverse_lazy('dashboard:assignments:assignments')
 
 class TareaDeleteView(DeleteView):
     context_object_name = 'tarea'
     model = Tarea
-    template_name = 'dashboard/personal_management/delete_assignment.html'
-    success_url = reverse_lazy('dashboard:personal_management:assignments')
+    template_name = 'dashboard/assignments/delete_assignment.html'
+    success_url = reverse_lazy('dashboard:assignments:assignments')
 
 class TareaDetailView(DetailView):
     context_object_name = 'tarea'
     model = Tarea
     queryset = Tarea.objects.all()
-    template_name = 'dashboard/personal_management/detail_assignment.html'
+    template_name = 'dashboard/assignments/detail_assignment.html'
     http_method_names = ['get']
 
 class TareaUpdateView(UpdateView):
