@@ -73,13 +73,18 @@ class ReporteViewSet(mixins.RetrieveModelMixin,
         except:
             voluntario = None
 
+        if request.data['es_solicitud_de_ayuda'] == "true":
+            esAyuda = True
+        else:
+            esAyuda = False
+
         reporte = Reporte(
             latitud=decimal.Decimal(request.data['latitud']),
             longitud=decimal.Decimal(request.data['longitud']),
             incidencia=incidencia,
             contenido=request.data['contenido'],
             reportado_por=voluntario,
-            es_solicitud_de_ayuda=bool(request.data['es_solicitud_de_ayuda'])
+            es_solicitud_de_ayuda=esAyuda
         )
         reporte.save()
 
