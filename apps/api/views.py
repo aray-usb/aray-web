@@ -47,13 +47,13 @@ class ReporteViewSet(mixins.RetrieveModelMixin,
     queryset = Reporte.objects.all().order_by('-fecha_de_reporte')
     serializer_class = ReporteSerializer
 
-    def create(request, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
         """
         Crea un nuevo reporte, creando una incidencia nueva en caso
         de ser necesario.
         """
 
-        incidencia_id = int(request.data.get('incidencia', None))
+        incidencia_id = int(request.data.get('incidencia', -1))
 
         if incidencia_id is None or incidencia_id == -1:
             incidencia = Incidencia(
