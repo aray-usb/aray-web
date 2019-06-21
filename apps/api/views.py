@@ -5,13 +5,17 @@ a través de views y viewsets.
 
 import decimal
 
+from django.contrib.auth.models import User
+
 from rest_framework import mixins, status, viewsets
+from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from apps.api.models import (
     Incidencia,
     Reporte,
-    Tarea
+    Tarea,
+    Voluntario,
 )
 
 from apps.api.serializers import (
@@ -19,6 +23,59 @@ from apps.api.serializers import (
     ReporteSerializer,
     TareaSerializer
 )
+
+class RegistroView(APIView):
+  """
+  Endpoint personalizado para el registro desde la app.
+  """
+
+  authentication_classes = ([])
+  permission_classes = ([])
+
+  def post(self, request, format=None):
+    """
+    Intenta registrar un usuario y devolver su información.
+    """
+
+    try:
+        first_name = request.data['first_name']
+        last_name = request.data['last_name']
+        username = request.data['username']
+        email = request.data['email']
+        password = request.data['password']
+        phone = request.data['phone']
+        document = request.data['document']
+    except KeyError:
+        return Response({"success": False, "content": "No se proporcionaron todos los datos."}, status=400)
+
+    usuario_existente = User.objects.filter(email=email) | User.objects.filter(username=username)
+
+    if usuario_existente.count() > 0:
+        return Response({"success": False, "content": "Ya existe un usuario con tus datos"}, status=400)
+
+    usuario = User(
+        first_name=first_name,
+        last_name=last_name,
+        email=email,
+        is_active=True
+    )
+    usuario.set_password(password)
+    usuario.save()
+
+    telefono = "({0}) {1}-{2}".format(
+        str(phone)[0:4],
+        str(phone)[4:7],
+        str(phone)[7:11],
+    )
+
+    voluntario = Voluntario(
+        usuario=usuario,
+        telefono=telefono,
+        nro_identidad=int(document)
+    )
+    voluntario.save()
+
+    return Response({"success": True, "content": "Usuario creado con éxito."}, status=201)
 
 class IncidenciaViewSet(mixins.RetrieveModelMixin,
                         mixins.ListModelMixin,
