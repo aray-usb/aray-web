@@ -63,21 +63,21 @@
  
 
                         <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">{{ form.fecha_compra.label }}</label>                        
+                            <label class="bmd-label-floating">{{ form.fecha_compra.label }}</label>
                             <div class="input-group">
                                 <div class="input-group-prepend bg-aray">
                                     <span class="input-group-text bg-transparent">
                                     <i class="fa fa-calendar text-white"></i>
                                     </span>
                                 </div>
-                                {% render_field form.fecha_compra class="form-control" placeholder="Fecha de Compra del Producto" aria-label="Fecha de Compra del Producto" aria-describedby="colored-addon1" %}
+                                {% render_field form.fecha_compra class="form-control datepicker-here" data-language='es' data-date-format="yyyy-mm-dd" placeholder="Fecha de Compra del Producto" aria-label="Fecha de Compra del Producto" aria-describedby="colored-addon1" %}
                             </div>
                             <p class="text-danger">{{form.fecha_compra.errors.as_text}}</p>
                         </div>
 
 
                         <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">{{ form.cantidad.label }}</label>                        
+                            <label class="bmd-label-floating">{{ form.cantidad.label }}</label>
                             <div class="input-group">
                                 <div class="input-group-prepend bg-aray">
                                     <span class="input-group-text bg-transparent">
@@ -91,24 +91,11 @@
 
 
                         <br><br><button type="submit" class="btn btn-success btn-block">Agregar Recurso</button>
-                                       
+
                     </form>
                 </div>
             </div>
         </div>
         <div class="col-md-3"></div>
     </div>
-
-
-<script>
-  $(function() {
-    $( ".datepicker" ).datepicker({
-      changeMonth: true,
-      changeYear: true,
-      yearRange: "1900:2012",
-      // You can put more options here.
-
-    });
-  });
-</script>
 {% endblock %}
