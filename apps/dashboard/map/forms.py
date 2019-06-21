@@ -1,5 +1,5 @@
 from django import forms
-from apps.api.models import Incidencia
+from apps.api.models import Incidencia, Reporte
 
 class IncidenciaForm(forms.ModelForm):
 
@@ -12,4 +12,17 @@ class IncidenciaForm(forms.ModelForm):
             'longitud',
             'radio',
             'estado',
+        )
+
+class ReporteForm(forms.ModelForm):
+
+    class Meta:
+        model = Reporte
+        fields = (
+            'incidencia',
+            'contenido',
+            'latitud',
+            'longitud',
+            'estado',
+            'reportado_por',
         )

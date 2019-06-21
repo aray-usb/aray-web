@@ -55,5 +55,80 @@
         </div>
     </div>
 
+    <div class="row purchace-popup mt-4">
+            <div class="col-12">
+                <span class="d-block d-md-flex align-items-center">
+                    <p class="text-gray" style="margin-right:5%;font-size:20px;">Reportes</p>
+                    <a class="btn purchase-button mt-4 mt-md-0" href="{% url 'dashboard:map:incidence_create' %}">Agregar Reporte</a>
+                </span>
+            </div>
+    </div>
 
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div style="display:flex;" ><i style="margin-top:5%;margin-left:5%; margin-right: 5%;" class="fa fa-user fa-2x text-gray" ></i><h3 class="text-gray mb-5" style="margin-top:5%;">Reportes</h3></div>
+                <div class="card-body" style="padding-top:0;">
+                    {% if reportes.count > 0 %}
+                    <table id="tablaReportes" class="display">
+                        <thead>
+                            <tr>
+                                <th> ID </th>
+                                <th> Contenido </th>
+                                <th> Estado </th>
+                                <th> Fecha de Reporte </th>
+                                <th> Reportado Por </th>
+                                <th> Acciones </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for reporte in reportes %}
+                            <tr>
+                                <td> {{ reporte.id }} </td>
+                                <td> {{ reporte.contenido }} </td>
+                                <td> {{ reporte.get_estado_display }} </td>
+                                <td> {{ reporte.fecha_de_reporte|date:"d/m/Y" }} </td>
+                                <td> {{ reporte.reportado_por }}</td>
+                                <td>
+
+                                    <a class="nav-link count-indicator " id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <button type="button" class="btn btn-icons btn-rounded btn-inverse-warning">
+                                            <i class="fa fa-gear"></i>
+                                        </button>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                                        <div class="dropdown-item">
+                                            <p class="mb-0 text-muted">Acciones</p>
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url "dashboard:map:report_update" reporte.id %}">Actualizar </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <p>No existen reportes agregados a la base de datos</p>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/jquery.dataTables.js' %}"></script>
+<script>
+    $(document).ready( function () {
+        $('#tablaReportes').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+            },
+            "order": [[0, 'desc']]
+        });
+    });</script>
 {% endblock %}
