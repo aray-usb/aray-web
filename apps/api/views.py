@@ -24,6 +24,34 @@ from apps.api.serializers import (
     TareaSerializer
 )
 
+class EstadoTareaView(APIView):
+    """
+    Endpoint personalizado para cambiar el estado de una tarea
+    desde la app.
+    """
+
+    def post(self, request, format=None):
+        """
+        Intenta cambiar el estado de una tarea y devolver
+        el resultado.
+        """
+
+        try:
+            id_tarea = int(request.data['id'])
+            nuevo_estado = int(request.data['estado'])
+        except KeyError, AttributeError, ValueError:
+            return Response({"success": False, "content": "No se proporcionaron todos los datos."}, status=400)
+
+        try:
+            tarea = Tarea.objects.get(pk=id_tarea)
+        except Tarea.DoesNotExist:
+            return Response({"success": False, "content": "ID de Tarea incorrecto."}, status=400)
+
+        tarea.estado = nuevo_estado
+        tarea.save()
+
+        return Response({"success": True, "content": "Tarea actualizada con éxito."}, status=201)
+
 class RegistroView(APIView):
   """
   Endpoint personalizado para el registro desde la app.

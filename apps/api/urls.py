@@ -34,4 +34,5 @@ urlpatterns = [
     path('tokens/refresh/', refresh_jwt_token),
     path('tokens/verify/', verify_jwt_token),
     path('registro/', views.RegistroView.as_view()),
+    path('actualizar-tarea/', views.EstadoTareaView.as_view()),
 ]
