@@ -62,11 +62,11 @@ class ReporteViewSet(mixins.RetrieveModelMixin,
                 latitud=decimal.Decimal(request.data['latitud']),
                 longitud=decimal.Decimal(request.data['longitud']),
             )
+            incidencia.save()
         else:
             incidencia = Incidencia.objects.get(
                 pk=incidencia_id
             )
-            incidencia.save()
 
         try:
             voluntario = request.user.voluntario
