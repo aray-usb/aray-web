@@ -39,8 +39,10 @@ class EstadoTareaView(APIView):
         try:
             id_tarea = int(request.data['id'])
             nuevo_estado = int(request.data['estado'])
-        except KeyError, AttributeError, ValueError:
+        except KeyError:
             return Response({"success": False, "content": "No se proporcionaron todos los datos."}, status=400)
+        except ValueError:
+            return Response({"success": False, "content": "Los datos proporcionados son inválidos."}, status=400)
 
         try:
             tarea = Tarea.objects.get(pk=id_tarea)
