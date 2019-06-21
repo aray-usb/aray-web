@@ -117,6 +117,4 @@ class TareaSerializer(serializers.HyperlinkedModelSerializer):
             'fecha_limite',
             'fecha_de_resolucion',
             'estado',
-            'asignada_por',
-            'asignada_a',
         )

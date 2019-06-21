@@ -129,3 +129,20 @@ class TareaViewSet(mixins.RetrieveModelMixin,
 
     queryset = Tarea.objects.all().order_by('fecha_limite')
     serializer_class = TareaSerializer
+
+    def list(self, request, *args, **kwargs):
+        """
+        Retorna una respuesta que enlista las tareas.
+        Incluye solo las tareas del usuario en cuestión.
+        """
+
+        try:
+            q = self.get_queryset().filter(
+                asignada_a=request.user.voluntario
+            )
+            queryset = self.filter_queryset(q)
+        except:
+            queryset = Tarea.objects.none()
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
