@@ -246,11 +246,15 @@ class TareaViewSet(mixins.RetrieveModelMixin,
         except:
             voluntario = None
 
+        if request.data['fecha_limite'] == "":
+            fecha = None
+        else:
+            fecha = request.data['fecha_limite']
 
         tarea = Tarea(
             titulo=request.data['titulo'],
             descripcion=request.data['descripcion'],
-            fecha_limite=request.data['fecha_limite'],
+            fecha_limite=fecha,
             asignada_a=voluntario,
             asignada_por=voluntario
         )
