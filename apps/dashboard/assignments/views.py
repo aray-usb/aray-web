@@ -29,13 +29,20 @@ class TareaCreateView(CreateView):
     model = Tarea
     queryset = Tarea.objects.all()
     template_name = 'dashboard/assignments/create_assignment.html'
-    success_url = reverse_lazy('dashboard:assignments:assignments')
+    success_url = reverse_lazy('dashboard:assignments:assignments_index')
 
 class TareaDeleteView(DeleteView):
     context_object_name = 'tarea'
     model = Tarea
     template_name = 'dashboard/assignments/delete_assignment.html'
-    success_url = reverse_lazy('dashboard:assignments:assignments')
+
+    def get(self, *a, **kw):
+        if self.request.is_ajax():
+            return super(TareaDeleteView, self).get(*a, **kw)
+        return redirect('dashboard:assignments:assignments_index')
+
+    def get_success_url(self):
+        return reverse_lazy('dashboard:assignments:assignments_index')
 
 class TareaDetailView(DetailView):
     context_object_name = 'tarea'
@@ -49,6 +56,6 @@ class TareaUpdateView(UpdateView):
     model = Tarea
     queryset = Tarea.objects.all()
     template_name = 'dashboard/assignments/update_assignment.html'
-    success_url = reverse_lazy('dashboard:assignments:assignments')
+    success_url = reverse_lazy('dashboard:assignments:assignments_index')
 
 

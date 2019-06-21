@@ -58,7 +58,7 @@
                                         <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="{% url "dashboard:personal_management:update_organization"  organizacion.id %}">Actualizar </a>
                                         <div class="dropdown-divider"></div>
-                                            <a class="delete-modal dropdown-item" href="{% url "dashboard:personal_management:delete_organization"  organizacion.id %}" id="delete_org" data-toggle="modal" data-target="#deleteOrg">Borrar</a>
+                                            <a class="dropdown-item eliminar" data-url="{% url "dashboard:personal_management:delete_organization"  organizacion.id %}" id="delete_org" data-toggle="modal" data-target="#deleteOrg">Borrar</a>
                                         </div>
                                     </div>
                                 </td>
@@ -125,7 +125,7 @@
                                         <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="{% url "dashboard:personal_management:update_v" voluntario.id %}">Actualizar </a>
                                         <div class="dropdown-divider"></div>
-                                            <a class="delete-modal dropdown-item" href="{% url "dashboard:personal_management:delete_v"  voluntario.id %}" id="delete_vol" data-toggle="modal" data-target="#deleteVol">Borrar</a>
+                                            <a class="dropdown-item eliminar" data-url="{% url "dashboard:personal_management:delete_v"  voluntario.id %}" id="delete_vol" data-toggle="modal" data-target="#deleteVol">Borrar</a>
                                     </div>
                                 </td>
                             </tr>
@@ -139,53 +139,6 @@
 
 
             </div>
-        </div>
-    </div>
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="deleteOrg" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title text-aray">Nombre</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    
-                </div>
-                <div class="modal-body">
-                    <p>¿Estás seguro de querer eliminar esta organización?</p>
-                    <form action="" method="POST">
-                        {% csrf_token %}
-                        <button class="btn button-aray float-right">Eliminar</button>
-                    </form>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="deleteVol" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title text-aray">Nombre</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    
-                </div>
-                <div class="modal-body">
-                    <p>¿Estás seguro de querer eliminar este Voluntario?</p>
-                    <form action="" method="POST">
-                        {% csrf_token %}
-                        <button class="btn button-aray float-right">Eliminar</button>
-                    </form>
-                </div>
-            </div>
-            
         </div>
     </div>
 

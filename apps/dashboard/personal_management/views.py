@@ -36,7 +36,14 @@ class OrganizacionDeleteView(DeleteView):
     context_object_name = 'organizacion'
     model = Organizacion
     template_name = 'dashboard/personal_management/delete_organization.html'
-    success_url = reverse_lazy('dashboard:personal_management:personal_index')
+
+    def get(self, *a, **kw):
+        if self.request.is_ajax():
+            return super(OrganizacionDeleteView, self).get(*a, **kw)
+        return redirect('dashboard:personal_management:personal_index')
+
+    def get_success_url(self):
+        return reverse_lazy('dashboard:personal_management:personal_index')
 
 class OrganizacionDetailView(DetailView):
     context_object_name = 'organizacion'
@@ -63,7 +70,14 @@ class VoluntarioDeleteView(DeleteView):
     context_object_name = 'voluntario'
     model = Voluntario
     template_name = 'dashboard/personal_management/delete_voluntario.html'
-    success_url = reverse_lazy('dashboard:personal_management:personal_index')
+
+    def get(self, *a, **kw):
+        if self.request.is_ajax():
+            return super(VoluntarioDeleteView, self).get(*a, **kw)
+        return redirect('dashboard:personal_management:personal_index')
+
+    def get_success_url(self):
+        return reverse_lazy('dashboard:personal_management:personal_index')
 
 class VoluntarioDetailView(DetailView):
     context_object_name = 'voluntario'

@@ -106,6 +106,14 @@
 
         </div>
 
+        <!-- Modal para CRUDs -->
+        <div style="margin-top: 2rem;" class="modal fade show" id="modalCRUD" aria-labelledby="examplePositionTop" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-simple modal-top">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
+
         <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
         <script src="{% static 'js/datepicker.min.js' %}"></script>
         <script src="{% static 'js/i18n/datepicker.es.js' %}"></script>
@@ -117,6 +125,20 @@
                 $("#ver-incidencias").click(function() {
                     window.location.href = "{% url 'dashboard:map:incidence_map' %}";
                 });
+            });
+
+            $(function() {
+                $('.eliminar').on('click', function(e) {
+                    const $this = $(this)
+                    $.ajax({
+                        url: $this.data('url'),
+                        method: 'GET',
+                        success: function(data) {
+                            $('#modalCRUD .modal-content').html(data)
+                            $('#modalCRUD').modal('show')
+                        }
+                    })
+                })
             });
         </script>
 

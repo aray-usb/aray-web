@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect, redirect
 from django.contrib.sites.shortcuts import get_current_site
 from django.views.generic import (
     CreateView,
@@ -12,7 +12,6 @@ from django.urls import reverse_lazy
 from utils.mixins.datatablesmixin import JQueryDataTablesMixin
 from apps.api.models import Recurso
 from .forms import *
-
 
 
 class ResourcesIndexView(TemplateView):
@@ -68,7 +67,14 @@ class ResourceDeleteView(DeleteView):
     context_object_name = 'recurso'
     model = Recurso
     template_name = 'dashboard/resources_management/delete_resource.html'
-    success_url = reverse_lazy('dashboard:resources_management:resources_index')
+
+    def get(self, *a, **kw):
+        if self.request.is_ajax():
+            return super(ResourceDeleteView, self).get(*a, **kw)
+        return redirect('dashboard:resources_management:resources_index')
+
+    def get_success_url(self):
+        return reverse_lazy('dashboard:resources_management:resources_index')
 
 class ResourceDetailView(DetailView):
     context_object_name = 'recurso'

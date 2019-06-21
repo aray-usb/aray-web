@@ -117,7 +117,7 @@
                                         <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="{% url "dashboard:resources_management:update_resource" recurso.id %}">Actualizar </a>
                                         <div class="dropdown-divider"></div>
-                                            <a class="delete-modal dropdown-item" href="{% url "dashboard:resources_management:delete_resource"  recurso.id %}" id="delete_vol" data-toggle="modal" data-target="#deleteVol">Borrar</a>
+                                            <a class="eliminar dropdown-item" data-url="{% url "dashboard:resources_management:delete_resource"  recurso.id %}" >Borrar</a>
                                         </div>
                                     </div>
                                 </td>
