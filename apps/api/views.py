@@ -251,8 +251,8 @@ class TareaViewSet(mixins.RetrieveModelMixin,
             titulo=request.data['titulo'],
             descripcion=request.data['descripcion'],
             fecha_limite=request.data['fecha_limite'],
-            asignado_a=voluntario,
-            asignado_por=voluntario
+            asignada_a=voluntario,
+            asignada_por=voluntario
         )
         tarea.save()
 
