@@ -28,7 +28,11 @@
             <div class="card" style="border-radius: 20px 20px 20px 20px;-moz-border-radius: 20px 30px 20px 10px;-webkit-border-radius: 20px 20px 20px 20px;">
                 <div class="card-body">
                     <h4 style="vertical-align:middle;text-align:center">
-                        {{ tarea.descripcion }}
+                        {% if tarea.descripcion %}
+                            {{ tarea.descripcion }}
+                        {% else %}
+                            Sin descripción
+                        {% endif %}
                     </h4>
                 </div>
             </div>
@@ -63,11 +67,15 @@
         <div class='col-4'>
             <div class="card" style="border-radius: 20px 20px 20px 20px;-moz-border-radius: 20px 30px 20px 10px;-webkit-border-radius: 20px 20px 20px 20px;">
                 <div class="card-body">
-                    <h4 style="vertical-align:middle;">
-                        Fecha Limite: {{ tarea.fecha_limite }}
+                    <h4 style="vertical-align:middle;text-align:center">
+                        {% if tarea.fecha_limite %}
+                            Fecha Limite: {{ tarea.fecha_limite }}
+                        {% else %}
+                            Sin fecha límite
+                        {% endif %}
                     </h4><br>
                     {% if tarea.estado == 2 %}
-                        <h4 style="vertical-align:middle;">
+                        <h4 style="vertical-align:middle;text-align:center">
                             Fecha de Resolucion: {{ tarea.fecha_de_resolucion }}
                         </h4>
                     {% endif %}

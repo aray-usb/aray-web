@@ -28,7 +28,7 @@
                     </div>
                     <div class="ticket-details col-md-9">
                         <div class="d-flex">
-                            <p class="text-dark font-weight-semibold mr-2 mb-0 no-wrap">Tarea Asignada a : {{ tarea.asignada_a }}</p>
+                            <p class="text-dark font-weight-semibold mr-2 mb-0 no-wrap">Tarea Asignada a: {{ tarea.asignada_a }}</p>
                             <p class="mb-0 ellipsis">{{ tarea.titulo }}</p>
                         </div>
                             <p class="text-gray ellipsis mb-2">{{ tarea.descripcion }}</p>
@@ -40,8 +40,12 @@
                                 </div>
                             {% else %}
                                 <div class="col-8 d-flex">
-                                    <small class="mb-0 mr-2 text-muted">Terminado el:</small>
-                                    <small class="Last-responded mr-2 mb-0 text-muted"> {{ tarea.fecha_de_resolucion }} </small>
+                                    {% if tarea.fecha_de_resolucion %}
+                                        <small class="mb-0 mr-2 text-muted">Terminado el:</small>
+                                        <small class="Last-responded mr-2 mb-0 text-muted"> {{ tarea.fecha_de_resolucion }} </small>
+                                    {% else %}
+                                        <small class="mb-0 mr-2 text-muted">No tiene fecha de resolución aún</small>
+                                    {% endif %}
                                 </div>
                             {% endif %}
                         </div>
