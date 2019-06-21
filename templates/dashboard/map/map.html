@@ -1,4 +1,5 @@
 {% extends 'dashboard/base.html' %}
+{% load static %}
 
 {% block title %}Mapa de Incidencias{% endblock %}
 
@@ -6,4 +7,127 @@
 
  <div id="mapid"></div>
 
+<div class="crud-wrapper">
+    <div class="row purchace-popup">
+            <div class="col-12">
+                <span class="d-block d-md-flex align-items-center">
+                    <p class="text-gray" style="margin-right:5%;font-size:20px;">Incidencias</p>
+                    <a class="btn purchase-button mt-4 mt-md-0" href="{% url 'dashboard:map:incidence_create' %}">Agregar Incidencia</a>
+                </span>
+            </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div style="display:flex;" ><i style="margin-top:5%;margin-left:5%; margin-right: 5%;" class="fa fa-user fa-2x text-gray" ></i><h3 class="text-gray mb-5" style="margin-top:5%;">Incidencias</h3></div>
+                <div class="card-body" style="padding-top:0;">
+                    {% if incidencias_tabla.count > 0 %}
+                    <table id="tablaIncidencias" class="display">
+                        <thead>
+                            <tr>
+                                <th> ID </th>
+                                <th> Nombre </td>
+                                <th> Descripción </td>
+                                <th> Estado </td>
+                                <th> Fecha de Reporte </td>
+                                <th> Acciones </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for incidencia in incidencias_tabla %}
+                            <tr>
+                                <td> {{ incidencia.id }} </td>
+                                <td> {{ incidencia.nombre }} </td>
+                                <td> {{ incidencia.descripcion }} </td>
+                                <td> {{ incidencia.get_estado_display }} </td>
+                                <td> {{ incidencia.fecha_de_reporte|date:"d/m/Y" }} </td>
+                                <td>
+
+                                    <a class="nav-link count-indicator " id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <button type="button" class="btn btn-icons btn-rounded btn-inverse-warning">
+                                            <i class="fa fa-gear"></i>
+                                        </button>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                                        <div class="dropdown-item">
+                                            <p class="mb-0 text-muted">Acciones</p>
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url "dashboard:map:incidence_detail" incidencia.id %}">Detalles</a>
+                                        <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url "dashboard:personal_management:update_v" incidencia.id %}">Actualizar </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <p>No existen voluntarios agregados a la base de datos</p>
+                    {% endif %}
+                </div>
+    
+    
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block css %}
+<style>
+    .content-wrapper {
+        padding: 0 !important;
+    }
+
+    #mapid {
+        height: 500px;
+    }
+
+    .crud-wrapper {
+        padding: 1.5rem 1.7rem;
+    }
+</style>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/jquery.dataTables.js' %}"></script>
+<script type="text/javascript">
+    var mymap = L.map('mapid').locate({setView: true, maxZoom: 16});
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: '{{ api_key }}'
+    }).addTo(mymap);
+    mymap.setZoom(15);
+
+    {% for incidencia in incidencias %}
+        var circle = L.circle([parseFloat("{{ incidencia.latitud }}".replace(",", ".")), parseFloat("{{ incidencia.longitud }}".replace(",", "."))], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.25,
+            radius: {% if not incidencia.radio%}500{% else %}{{ incidencia.radio }}{% endif %}
+        }).addTo(mymap);
+        circle.bindPopup("<b>{{ incidencia.nombre }}</b><br><i>{{ incidencia.descripcion }}</i><br>Estado: {{ incidencia.get_estado_display }}.");
+    {% endfor %}
+
+    {% for reporte in reportes %}
+        var marker = L.marker([parseFloat("{{ reporte.latitud }}".replace(",", ".")), parseFloat("{{ reporte.longitud }}".replace(",", "."))]).addTo(mymap);
+        marker.bindPopup("<b>{{ reporte.contenido}}</b><br>Estado: {{ reporte.get_estado_display }}.").openPopup();
+    {% endfor %}
+
+    $(document).ready( function () {
+        $('#tablaIncidencias').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+            },
+            "order": [[0, 'desc']]
+        });
+    });
+
+</script>
 {% endblock %}

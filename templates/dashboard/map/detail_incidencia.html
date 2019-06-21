@@ -1,0 +1,59 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Detalles de la Incidencia{% endblock %}
+
+{% block content %}
+
+    <div class="card" style="margin-bottom:5%;">
+        <div class="card-body">
+            <div class="float-right">
+                <a  href="{% url 'dashboard:map:incidence_map' %}">
+                    <button type="button" class="btn btn-icons btn-rounded btn-inverse-warning">
+                        <i class="fa fa-arrow-left"></i>
+                    </button>
+                </a>
+            </div>
+            <div>
+                <h1 class="text-aray"> Detalles de la Incidencia No. {{ incidencia.pk }} </h1>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-4">
+            <div class="card card-statistics" style="background-color:#F07049; border-radius: 100px 10px 10px 10px;-moz-border-radius: 100px 10px 10px 10px;-webkit-border-radius: 100px 10px 10px 10px;">
+                <div class="card-body">
+                    <div class="clearfix">
+                        <div class="float-left">
+                        <i class="fa fa-id-card fa-5x text-white"></i>
+                        </div>
+                        <div class="float-right">
+                        <p class="mb-0 text-right text-white">Incidencia</p>
+                        <div class="fluid-container">
+                            <h3 class="font-weight-medium text-right text-white mb-0"> {{ incidencia.nombre }} </h3>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-8">
+            <div class="card" style="border-radius: 20px 20px 20px 20px;-moz-border-radius: 20px 30px 20px 10px;-webkit-border-radius: 20px 20px 20px 20px;">
+                <div class="card-body">
+                    <h3 class="text-aray"> Descripción: </h3><h3 class="text-gray"> {{ incidencia.descripcion }} </h3><br>
+                    <h3 class="text-aray"> Estado: </h3><h3 class="text-gray"> {{ incidencia.get_estado_display }} </h3><br>
+                    <h3 class="text-aray"> Fecha de Reporte: </h3><h3 class="text-gray"> {{ incidencia.fecha_de_reporte|date:"d/m/Y" }} </h3><br>
+                    <h3 class="text-aray"> Fecha de Resolución: </h3><h3 class="text-gray"> {{ incidencia.fecha_de_resolucion|date:"d/m/Y" }} </h3><br>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
