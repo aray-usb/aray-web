@@ -236,7 +236,7 @@ class TareaViewSet(mixins.RetrieveModelMixin,
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
-        def create(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
         """
         Crea una nueva tarea asignada al usuario.
         """
