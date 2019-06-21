@@ -446,7 +446,8 @@ class Organizacion(GeoModelo):
     dirigida_por = models.ManyToManyField(
         Voluntario,
         related_name="dirige",
-        verbose_name="Dirigida por"
+        verbose_name="Dirigida por",
+        blank=True,
     )
 
 class Recurso(models.Model):
