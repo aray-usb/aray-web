@@ -21,14 +21,13 @@ from apps.api.serializers import (
 )
 
 class IncidenciaViewSet(mixins.RetrieveModelMixin,
-                        mixins.UpdateModelMixin,
                         mixins.ListModelMixin,
                         viewsets.GenericViewSet):
     """
     Endpoint de la API para listar, actualizar y
     ver detalles de las incidencias.
 
-    Métodos permitidos: GET, PUT, PATCH.
+    Métodos permitidos: GET.
     """
 
     queryset = Incidencia.objects.all().order_by('-fecha_de_reporte')
@@ -36,7 +35,6 @@ class IncidenciaViewSet(mixins.RetrieveModelMixin,
 
 class ReporteViewSet(mixins.RetrieveModelMixin,
                      mixins.CreateModelMixin,
-                     mixins.UpdateModelMixin,
                      mixins.ListModelMixin,
                      viewsets.GenericViewSet):
     """
@@ -48,6 +46,39 @@ class ReporteViewSet(mixins.RetrieveModelMixin,
 
     queryset = Reporte.objects.all().order_by('-fecha_de_reporte')
     serializer_class = ReporteSerializer
+
+    def create(request, *args, **kwargs):
+        """
+        Crea un nuevo reporte, creando una incidencia nueva en caso
+        de ser necesario.
+        """
+
+        incidencia_id = int(request.data.get('incidencia', None))
+
+        if incidencia_id is None or incidencia_id == -1:
+            incidencia = Incidencia(
+                nombre="Nueva incidencia por confirmar",
+                descripcion="Pendiente de revisión",
+                latitud=decimal.Decimal(request.data['latitud']),
+                longitud=decimal.Decimal(request.data['longitud']),
+            )
+        else:
+            incidencia = Incidencia.objects.get(
+                pk=incidencia_id
+            )
+
+        reporte = Reporte(
+            latitud=decimal.Decimal(request.data['latitud']),
+            longitud=decimal.Decimal(request.data['longitud']),
+            incidencia=incidencia,
+            contenido=request.data['contenido'],
+            reportado_por=request.user
+        )
+        reporte.save()
+
+        serializer = self.get_serializer(reporte)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def list(self, request, *args, **kwargs):
         """
@@ -62,7 +93,12 @@ class ReporteViewSet(mixins.RetrieveModelMixin,
         if latitud is not None and longitud is not None:
             queryset = Reporte.obtener_cercanos(latitud, longitud)
         else:
-            queryset = self.filter_queryset(self.get_queryset())
+            q = self.get_queryset().exclude(
+                incidencia__estado=Incidencia.ESTADO_RECHAZADA
+            ).exclude(
+                incidencia__estado=Incidencia.ESTADO_RESUELTA
+            )
+            queryset = self.filter_queryset(q)
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
