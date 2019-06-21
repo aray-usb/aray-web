@@ -1,0 +1,60 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Detalles de la Organización{% endblock %}
+
+{% block content %}
+
+    <div class="card" style="margin-bottom:5%;">
+        <div class="card-body">
+            <div class="float-right">
+                <a  href="{% url 'dashboard:resources_management:resources_index' %}">
+                    <button type="button" class="btn btn-icons btn-rounded btn-inverse-warning">
+                        <i class="fa fa-arrow-left"></i>
+                    </button>
+                </a>
+            </div>
+            <div>
+                <h1 class="text-aray">{{ recurso.nombre }}</h1>
+                <p class="card-description">
+                    Detalles del recurso No. {{ recurso.pk }}
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card card-statistics" style="background-color:#F07049; border-radius: 90px 90px 90px 10px;-moz-border-radius: 90px 90px 90px 10px;-webkit-border-radius: 90px 90px 90px 10px;">
+        <div class="card-body">
+            <div class="clearfix">
+                <div class="float-left">
+                    {% if recurso.tipo == 0%}
+                        <i class="fa fa-medkit fa-5x text-white"></i>
+                    {% elif recurso.tipo == 1 %}
+                        <i class="fa fa-spoon fa-5x text-white"></i>
+                    {% elif recurso.tipo == 2 %}
+                        <i class="fa fa-car fa-5x text-white"></i>
+                    {% elif recurso.tipo == 3 %}
+                        <i class="fa fa-flag fa-5x text-white"></i>
+                    {% elif recurso.tipo == 999 %}
+                        <i class="fa fa-question fa-5x text-white"></i>
+                    {% endif %}
+                    
+                </div>
+                <div class="float-right">
+                <p class="mb-0 text-right text-white">Fecha de Compra: {{recurso.fecha_compra} </p>
+                <div class="fluid-container">
+                    <h3 class="font-weight-medium text-right text-white mb-0">Cantidad: {{recurso.cantidad}} </h3>
+                    <h3 class="font-weight-medium text-right text-white mb-0"> Tipo: {{ recurso.tipo }} </h3>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

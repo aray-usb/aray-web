@@ -1,17 +1,17 @@
-
 from django.urls import reverse_lazy
 from django.shortcuts import HttpResponseRedirect
 from django.contrib.sites.shortcuts import get_current_site
 from django.views.generic import (
     CreateView,
     DetailView,
-    ListView,
     TemplateView,
     UpdateView,
+    DeleteView,
 )
+from django.urls import reverse_lazy
 from utils.mixins.datatablesmixin import JQueryDataTablesMixin
-from .forms import *
 from apps.api.models import Recurso
+from .forms import *
 
 
 
@@ -19,24 +19,68 @@ class ResourcesIndexView(TemplateView):
     template_name = 'dashboard/resources_management/resources_management.html'
     http_method_names = ['get']
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        """
+        if Recurso.objects.filter(tipo=0).count() == 0:
+            cantMedicinas = 0
+        else:
+            cantMedicinas = Recurso.objects.get(tipo=0).cantidad
+        if  Recurso.objects.filter(tipo=1).count() == 0:
+            cantAlimentacion = 0
+        else:
+            cantAlimentacion = Recurso.objects.get(tipo=1).cantidad
+        if Recurso.objects.filter(tipo=2).count() == 0:
+            cantTransporte = 0
+        else:
+            cantTransporte = Recurso.objects.get(tipo=2).cantidad
+        if Recurso.objects.filter(tipo=3).count() == 0:    
+            cantArticuloRescate = 0
+        else:
+            cantArticuloRescate = Recurso.objects.get(tipo=3).cantidad
+        if Recurso.objects.filter(tipo=4).count() == 0:
+            cantOtro = 0
+        else:
+            cantOtro = Recurso.objects.get(tipo=4).cantidad
+        total = cantMedicinas + cantAlimentacion + cantTransporte + cantArticuloRescate + cantOtro
+        print(total)
+        """
+        context["recursos"] =  Recurso.objects.all()
+        """
+        context['propMedicinas'] = str((cantMedicinas * 100) / total)
+        context['propAlimentos'] = str((cantAlimentacion * 100) / total)
+        context['propTransporte'] = str((cantTransporte * 100) / total)
+        context['propArticuloRescate'] = str((cantArticuloRescate * 100) / total)
+        context['propOtro'] = str((cantOtro * 100) / total)
+        context['total'] = total
+        """
+        
+        return context
 
-class ResourcesCreateView(CreateView):
+class ResourceCreateView(CreateView):
     form_class = ResourceForm
     model = Recurso
     queryset = Recurso.objects.all()
     template_name = 'dashboard/resources_management/create_resource.html'
-    success_url = reverse_lazy('dashboard:resources_management:resources')
+    success_url = reverse_lazy('dashboard:resources_management:resources_index')
 
+class ResourceDeleteView(DeleteView):
+    context_object_name = 'recurso'
+    model = Recurso
+    template_name = 'dashboard/resources_management/delete_resource.html'
+    success_url = reverse_lazy('dashboard:resources_management:resources_index')
 
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        ctx['base_url'] = 'http://%s' % get_current_site(self.request).domain
-        return ctx
+class ResourceDetailView(DetailView):
+    context_object_name = 'recurso'
+    model = Recurso
+    queryset = Recurso.objects.all()
+    template_name = 'dashboard/resources_management/detail_resource.html'
+    http_method_names = ['get']
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.save()
-
-        return super().form_valid(form)
-
+class ResourceUpdateView(UpdateView):
+    form_class = ResourceForm
+    model = Recurso
+    queryset = Recurso.objects.all()
+    template_name = 'dashboard/resources_management/update_resource.html'
+    success_url = reverse_lazy('dashboard:resources_management:resources_index')
 

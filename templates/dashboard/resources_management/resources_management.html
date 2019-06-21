@@ -1,5 +1,8 @@
 {% extends 'dashboard/base.html' %}
-
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/jquery.dataTables.css' %}">
+{% endblock %}
 {% block title %}Manejo de Recursos{% endblock %}
 
 {% block content %}
@@ -12,56 +15,66 @@
                     <div class="wrapper d-flex justify-content-between">
                         <div class="side-left">
                             <p class="mb-2 text-gray">Número de artículos registrados:</p>
-                            <p class="display-3 mb-4 font-weight-light text-gray">321 artículos</p>
+                            <p class="display-3 mb-4 font-weight-light text-gray">{{ total }} artículos</p>
                         </div>
                     </div>
                     <div class="wrapper">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-gray">Medicinas</p>
-                            <p class="mb-2 text-primary">12%</p>
+                            <p class="mb-2 text-primary">{{ propMedicinas }}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: 12%" aria-valuenow="88"
+                            <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ propMedicinas }}%" aria-valuenow="88"
                             aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="wrapper mt-4">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-gray">Alimentos</p>
-                            <p class="mb-2 text-dark">36%</p>
+                            <p class="mb-2 text-dark"> {{propAlimentos}}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" role="progressbar" style="width: 36%" aria-valuenow="56"
+                            <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{propAlimentos}}%" aria-valuenow="56"
                             aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="wrapper mt-4">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-gray">Artículos de Rescate</p>
-                            <p class="mb-2 text-warning">7%</p>
+                            <p class="mb-2 text-warning">{{propArticuloRescate}}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: 7%" aria-valuenow="88"
+                            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{propArticuloRescate}}%" aria-valuenow="88"
                             aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="wrapper mt-4">
                         <div class="d-flex justify-content-between">
-                            <p class="mb-2 text-gray">Vehículos</p>
-                            <p class="mb-2 text-success">72%</p>
+                            <p class="mb-2 text-gray">Transporte</p>
+                            <p class="mb-2 text-success">{{propTransporte}}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 72%" aria-valuenow="56"
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{propTransporte}}%" aria-valuenow="56"
                             aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
+                    <div class="wrapper mt-4">
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2 text-gray">Otros</p>
+                            <p class="mb-2 text-success">{{propOtro}}%</p>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{propOtro}}%" aria-valuenow="56"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>                    
                 </div>
             </div>
         </div>
         <div class="col-5">
             <span class="d-block d-md-flex align-items-center">
                 <p>¡Registra un nuevo bien aquí!</p>
-                <a class="btn purchase-button mt-4 mt-md-0" target="_blank">Registrar bien</a>
+                <a class="btn purchase-button mt-4 mt-md-0" href="{% url 'dashboard:resources_management:create_resource' %}">Registrar bien</a>
             </span>
         </div>
 
@@ -72,135 +85,65 @@
             <div class="card-body">
                 <h3 class="card-title text-gray">Recursos Registrados</h3>
                 <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>
-                        #
-                        </th>
-                        <th>
-                        Nombre
-                        </th>
-                        <th>
-                        Tipo de Recurso
-                        </th>
-                        <th>
-                        Fecha de Registro
-                        </th>
-                        <th>
-                        Precio de Compra
-                        </th>
-                        <th>
-                        Cantidad
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            Toyota Fortuner
-                        </td>
-                        <td>
-                            <label class="badge badge-success">Vehículos</label>
-                        </td>
-                        <td>
-                            28 May, 2015
-                        </td>
-                        <td>
-                            30000000 Bs.S.
-                        </td>
-                        <td>
-                            2
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            2
-                        </td>
-                        <td>
-                            Atún en Lata
-                        </td>
-                        <td>
-                            <label class="badge badge-dark">Alimentos</label>
-                        </td>
-                        <td>
-                            12 Sept, 2011
-                        </td>
-                        <td>
-                            127000 Bs.S.
-                        </td>
-                        <td>
-                            4
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            Cascos Protextores
-                        </td>
-                        <td>
-                            <label class="badge badge-warning">Artículo de Rescate</label>
-                        </td>
-                        <td>
-                            01 Ene, 2019
-                        </td>
-                        <td>
-                            450000 Bs.S.
-                        </td>
-                        <td>
-                            10
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            4
-                        </td>
-                        <td>
-                            Leche en Polvo
-                        </td>
-                        <td>
-                            <label class="badge badge-dark">Alimentos</label>
-                        </td>
-                        <td>
-                            28 Feb, 2016
-                        </td>
-                        <td>
-                            4520000 Bs.S.
-                        </td>
-                        <td>
-                            20
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            5
-                        </td>
-                        <td>
-                            Azitromicina
-                        </td>
-                        <td>
-                            <label class="badge badge-primary">Medicinas</label>
-                        </td>
-                        <td>
-                            15 Mar, 2019
-                        </td>
-                        <td>
-                            20000 Bs.S.
-                        </td>
-                        <td>
-                            1
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                    {% if recursos.count > 0 %}
+                    <table id="tablaRecursos" class="display">
+                        <thead>
+                            <tr>
+                                <th> Nombre </td>
+                                <th> Tipo </td>
+                                <th> Cantidad </td>
+                                <th> Acciones </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for recurso in recursos %}
+                            <tr>
+                                <td> {{ recurso.nombre }} </td>
+                                <td> {{ recurso.tipo }} </td>
+                                <td> {{ recurso.cantidad }} </td>
+                                <td>
+                                    
+                                    <a class="nav-link count-indicator " id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                        <button type="button" class="btn btn-icons btn-rounded btn-inverse-warning">
+                                            <i class="fa fa-gear"></i>
+                                        </button>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                                        <div class="dropdown-item">
+                                            <p class="mb-0 text-muted">Acciones</p>
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url "dashboard:resources_management:detail_resource" recurso.id %}">Detalles</a>
+                                        <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url "dashboard:resources_management:update_resource" recurso.id %}">Actualizar </a>
+                                        <div class="dropdown-divider"></div>
+                                            <a class="delete-modal dropdown-item" href="{% url "dashboard:resources_management:delete_resource"  recurso.id %}" id="delete_vol" data-toggle="modal" data-target="#deleteVol">Borrar</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <p>No existen recursos agregados a la base de datos</p>
+                    {% endif %}
                 </div>
             </div>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/jquery.dataTables.js' %}"></script>
+    <script>
+    $(document).ready( function () {
+        $('#tablaRecursos').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        }
+        });
+
+    });
+    </script>
 {% endblock %}

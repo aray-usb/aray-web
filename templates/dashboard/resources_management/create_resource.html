@@ -2,7 +2,7 @@
 {% load static %}
 {% load widget_tweaks %}
 
-{% block title %}Crear Voluntario{% endblock %}
+{% block title %}Crear Recurso{% endblock %}
 
 {% block content %}
 
@@ -22,7 +22,7 @@
 
     <div class="row">
         <div class="col-md-3">
-            <a  href="{% url 'dashboard:personal_management:personal_index' %}">
+            <a  href="{% url 'dashboard:resources_management:resources_index' %}">
                 <button type="button" class="btn btn-icons btn-rounded btn-inverse-warning">
                     <i class="fa fa-arrow-left"></i>
                 </button>
@@ -31,63 +31,66 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title text-aray mb-5">Crear Voluntario</h2>
+                    <h2 class="card-title text-aray mb-5">Crear Recurso</h2>
                     <form method="POST" >
                         {% csrf_token %}
 
                         <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">{{ form.usuario.label }}</label>                        
+                            <label class="bmd-label-floating">{{ form.nombre.label }}</label>                        
                             <div class="input-group">
                                 <div class="input-group-prepend bg-aray">
                                     <span class="input-group-text bg-transparent">
-                                    <i class="fa fa-id-card text-white"></i>
+                                    <i class="fa fa-header text-white"></i>
                                     </span>
                                 </div>
-                                {% render_field form.usuario class="form-control" placeholder="Usuario Asociado" aria-label="Usuario" aria-describedby="colored-addon1" %}
+                                {% render_field form.nombre class="form-control" placeholder="Nombre del Recurso" aria-label="Nombre" aria-describedby="colored-addon1" %}
                             </div>
-                            <p class="text-danger">{{form.usuario.errors.as_text}}</p>
+                            <p class="text-danger">{{form.nombre.errors.as_text}}</p>
                         </div>
 
                         <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">{{ form.telefono.label }}</label>                        
+                            <label class="bmd-label-floating">{{ form.tipo.label }}</label>                        
                             <div class="input-group">
                                 <div class="input-group-prepend bg-aray">
                                     <span class="input-group-text bg-transparent">
-                                    <i class="fa fa-phone text-white"></i>
+                                    <i class="fa fa-bars text-white"></i>
                                     </span>
                                 </div>
-                                {% render_field form.telefono class="form-control" placeholder="Telefono" aria-label="Telefono" aria-describedby="colored-addon1" %}
+                                {% render_field form.tipo class="form-control" placeholder="Tipo del Recurso" aria-label="Tipo" aria-describedby="colored-addon1" %}
                             </div>
-                            <p class="text-danger">{{form.telefono.errors.as_text}}</p>
+                            <p class="text-danger">{{form.tipo.errors.as_text}}</p>
                         </div>
+ 
 
                         <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">{{ form.tipo_identidad.label }}</label>                        
+                            <label class="bmd-label-floating">{{ form.fecha_compra.label }}</label>                        
                             <div class="input-group">
                                 <div class="input-group-prepend bg-aray">
                                     <span class="input-group-text bg-transparent">
-                                    <i class="fa fa-id-badge text-white"></i>
+                                    <i class="fa fa-calendar text-white"></i>
                                     </span>
                                 </div>
-                                {% render_field form.tipo_identidad class="form-control" placeholder="Tipo Identidad" aria-label="Tipo Identidad" aria-describedby="colored-addon1" %}
+                                {% render_field form.fecha_compra class="form-control" placeholder="Fecha de Compra del Producto" aria-label="Fecha de Compra del Producto" aria-describedby="colored-addon1" %}
                             </div>
-                            <span class="text-danger">{{form.tipo_identidad.errors.as_text}}</span>
+                            <p class="text-danger">{{form.fecha_compra.errors.as_text}}</p>
                         </div>
+
 
                         <div class="form-group bmd-form-group">
-                            <label class="bmd-label-floating">{{ form.nro_identidad.label }}</label>                        
+                            <label class="bmd-label-floating">{{ form.cantidad.label }}</label>                        
                             <div class="input-group">
                                 <div class="input-group-prepend bg-aray">
                                     <span class="input-group-text bg-transparent">
-                                    <i class="fa fa-id-badge text-white"></i>
+                                    <i class="fa fa-circle text-white"></i>
                                     </span>
                                 </div>
-                                {% render_field form.nro_identidad class="form-control" placeholder="Numero de Identidad" aria-label="Numero de Identidad" aria-describedby="colored-addon1" %}
+                                {% render_field form.cantidad class="form-control" placeholder="Cantidad" aria-label="Cantidada" aria-describedby="colored-addon1" %}
                             </div>
-                            <span class="text-danger">{{form.nro_identidad.errors.as_text}}</span>
+                            <p class="text-danger">{{form.cantidad.errors.as_text}}</p>
                         </div>
 
-                        <br><br><button type="submit" class="btn btn-success btn-block">Agregar Voluntario</button>
+
+                        <br><br><button type="submit" class="btn btn-success btn-block">Agregar Recurso</button>
                                        
                     </form>
                 </div>
@@ -97,5 +100,15 @@
     </div>
 
 
+<script>
+  $(function() {
+    $( ".datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1900:2012",
+      // You can put more options here.
 
+    });
+  });
+</script>
 {% endblock %}
