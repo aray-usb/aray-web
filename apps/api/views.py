@@ -40,19 +40,19 @@ class EstadoTareaView(APIView):
             id_tarea = int(request.data['id'])
             nuevo_estado = int(request.data['estado'])
         except KeyError:
-            return Response({"success": False, "content": "No se proporcionaron todos los datos."}, status=400)
+            return Response({"success": False, "content": "No se proporcionaron todos los datos."}, status=400, content_type="application/json; charset=utf-8")
         except ValueError:
-            return Response({"success": False, "content": "Los datos proporcionados son inválidos."}, status=400)
+            return Response({"success": False, "content": "Los datos proporcionados son inválidos."}, status=400, content_type="application/json; charset=utf-8")
 
         try:
             tarea = Tarea.objects.get(pk=id_tarea)
         except Tarea.DoesNotExist:
-            return Response({"success": False, "content": "ID de Tarea incorrecto."}, status=400)
+            return Response({"success": False, "content": "ID de Tarea incorrecto."}, status=400, content_type="application/json; charset=utf-8")
 
         tarea.estado = nuevo_estado
         tarea.save()
 
-        return Response({"success": True, "content": "Tarea actualizada con éxito."}, status=201)
+        return Response({"success": True, "content": "Tarea actualizada con éxito."}, status=201, content_type="application/json; charset=utf-8")
 
 class RegistroView(APIView):
   """
@@ -107,7 +107,7 @@ class RegistroView(APIView):
     )
     voluntario.save()
 
-    return Response({"success": True, "content": "Usuario creado con éxito."}, status=201)
+    return Response({"success": True, "content": "Usuario creado con éxito."}, status=201, content_type="application/json; charset=utf-8")
 
 class IncidenciaViewSet(mixins.RetrieveModelMixin,
                         mixins.ListModelMixin,
@@ -179,7 +179,7 @@ class ReporteViewSet(mixins.RetrieveModelMixin,
 
         serializer = self.get_serializer(reporte)
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers, content_type="application/json; charset=utf-8")
 
     def list(self, request, *args, **kwargs):
         """
@@ -202,7 +202,7 @@ class ReporteViewSet(mixins.RetrieveModelMixin,
             queryset = self.filter_queryset(q)
 
         serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, content_type="application/json; charset=utf-8")
 
 class TareaViewSet(mixins.RetrieveModelMixin,
                    mixins.CreateModelMixin,
@@ -234,7 +234,7 @@ class TareaViewSet(mixins.RetrieveModelMixin,
             queryset = Tarea.objects.none()
 
         serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, content_type="application/json; charset=utf-8")
 
     def create(self, request, *args, **kwargs):
         """
@@ -262,4 +262,4 @@ class TareaViewSet(mixins.RetrieveModelMixin,
 
         serializer = self.get_serializer(tarea)
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers, content_type="application/json; charset=utf-8")
