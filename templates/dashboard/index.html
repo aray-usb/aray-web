@@ -15,14 +15,13 @@
                         <div class="float-right">
                             <p class="mb-0 text-right text-white">Organizaciones</p>
                             <div class="fluid-container">
-                                <h3 class="font-weight-medium text-right mb-0 text-white">34 Organizacion Registradas</h3>
+                                <h3 class="font-weight-medium text-right mb-0 text-white">{{ organizaciones }} Organizacion Registradas</h3>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> 
-
+        </div>
 
         <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 grid-margin stretch-card">
             <div class="card card-statistics" style="background-color:#e6b765; border-radius: 100px 10px 10px 10px;-moz-border-radius: 100px 10px 10px 10px;-webkit-border-radius: 100px 10px 10px 10px;">
@@ -34,13 +33,13 @@
                         <div class="float-right">
                         <p class="mb-0 text-right text-white">Voluntarios</p>
                         <div class="fluid-container">
-                            <h3 class="font-weight-medium text-right text-white mb-0">24 Voluntarios</h3>
+                            <h3 class="font-weight-medium text-right text-white mb-0">{{ voluntarios }} Voluntarios</h3>
                         </div>
                         </div>
                     </div>
                     </div>
             </div>
-        </div> 
+        </div>
 
     </div>
     <div class="row">
@@ -54,7 +53,8 @@
                         <div class="float-right">
                         <p class="mb-0 text-right text-white">Mapa de Incidencias</p>
                         <div class="fluid-container">
-                            <h3 class="font-weight-medium text-right text-white mb-0">15 Incidencias</h3>
+                            <h3 class="font-weight-medium text-right text-white mb-0">{{ incidencias }} Incidencias</h3>
+                            <h3 class="font-weight-medium text-right text-white mb-0">{{ reportes }} Reportes</h3>
                         </div>
                         </div>
                     </div>
@@ -65,40 +65,40 @@
     </div>
     <div class="row">
         <div class="col-lg-6 grid-margin stretch-card">
-            <div class="card" style="background-color:#62b9c4; border-radius: 10px 140px 10px 10px;-moz-border-radius: 10px 150px 10px 10px;-webkit-border-radius: 10px 150px 10px 10px;"> 
+            <div class="card" style="background-color:#62b9c4; border-radius: 10px 140px 10px 10px;-moz-border-radius: 10px 150px 10px 10px;-webkit-border-radius: 10px 150px 10px 10px;">
                 <div class="card-body">
                    <i class="fa fa-check fa-5x text-white"></i>
                     <div class="wrapper d-flex justify-content-between">
                         <div class="side-left">
                             <p class="mb-2 text-white">Asignaciones</p>
-                            <p class="display-3 mb-4 font-weight-light text-white">321 Asignaciones</p>
+                            <p class="display-3 mb-4 font-weight-light text-white">{{ asignaciones }} Asignaciones</p>
                         </div>
                     </div>
                     <div class="wrapper">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-white">Tareas Nuevas</p>
-                            <p class="mb-2 text-white">30%</p>
+                            <p class="mb-2 text-white">{{ tareas_nuevas }}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-secundary progress-bar-striped progress-bar-animated" role="progressbar" style="width: 12%" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-secundary progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ tareas_nuevas }}%" aria-valuenow="{{ tareas_nuevas }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="wrapper mt-4">
                         <div class="d-flex justify-content-between">
-                            <p class="mb-2 text-white">Tareas en Proceso</p>
-                            <p class="mb-2 text-white">51%</p>
+                            <p class="mb-2 text-white">Tareas en Progreso</p>
+                            <p class="mb-2 text-white">{{ tareas_en_progreso }}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: 36%" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ tareas_en_progreso }}%" aria-valuenow="{{ tareas_en_progreso }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="wrapper mt-4">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-white">Tareas Realizadas</p>
-                            <p class="mb-2 text-white">19%</p>
+                            <p class="mb-2 text-white">{{ tareas_realizadas }}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 7%" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ tareas_realizadas }}%" aria-valuenow="{{ tareas_realizadas }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
@@ -109,51 +109,50 @@
             <div class="card" style="background-color:#71e03a; border-radius: 150px 10px 10px 10px;-moz-border-radius: 150px 10px 10px 10px;-webkit-border-radius: 150px 10px 10px 10px;">
                 <div class="card-body">
                     <i class="fa fa-tags fa-5x text-white" style="margin-left:75%;"></i>
-                    <div class="wrapper d-flex justify-content-between" style="text-align:right;margin-left:40%;">
+                    <div class="wrapper d-flex justify-content-end" style="text-align:right;margin-left:40%;">
                         <div class="side-left">
                             <p class="mb-2 text-white" >Artículos</p>
-                            <p class="display-3 mb-4 font-weight-light text-white">321 Artículos</p>
+                            <p class="display-3 mb-4 font-weight-light text-white">{{ articulos }} Artículos</p>
                         </div>
                     </div>
                     <div class="wrapper">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-white">Medicinas</p>
-                            <p class="mb-2 text-white">12%</p>
+                            <p class="mb-2 text-white">{{ articulos_medicina }}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: 12%" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ articulos_medicina }}%" aria-valuenow="{{ articulos_medicina }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="wrapper mt-4">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-white">Alimentos</p>
-                            <p class="mb-2 text-white">36%</p>
+                            <p class="mb-2 text-white">{{ articulos_alimentacion }}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" role="progressbar" style="width: 36%" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ articulos_alimentacion }}%" aria-valuenow="{{ articulos_alimentacion }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="wrapper mt-4">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-white">Artículos de Rescate</p>
-                            <p class="mb-2 text-white">7%</p>
+                            <p class="mb-2 text-white">{{ articulos_rescate }}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: 7%" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ articulos_rescate }}%" aria-valuenow="{{ articulos_rescate }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="wrapper mt-4">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-white">Vehículos</p>
-                            <p class="mb-2 text-white">72%</p>
+                            <p class="mb-2 text-white">{{ articulos_transporte }}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 72%" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ articulos_transporte }}%" aria-valuenow="{{ articulos_transporte }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}

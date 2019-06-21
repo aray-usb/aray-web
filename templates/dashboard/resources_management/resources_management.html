@@ -14,57 +14,57 @@
                     <h2 class="card-title text-aray mb-5">Resúmen de Artículos Registrados</h2>
                     <div class="wrapper d-flex justify-content-between">
                         <div class="side-left">
-                            <p class="mb-2 text-gray">Número de artículos registrados:</p>
-                            <p class="display-3 mb-4 font-weight-light text-gray">{{ total }} artículos</p>
+                            <p class="mb-2 text-gray">Número de Artículos Registrados:</p>
+                            <p class="display-3 mb-4 font-weight-light text-gray">{{ articulos }} artículos</p>
                         </div>
                     </div>
                     <div class="wrapper">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-gray">Medicinas</p>
-                            <p class="mb-2 text-primary">{{ propMedicinas }}%</p>
+                            <p class="mb-2 text-primary">{{ articulos_medicina }}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ propMedicinas }}%" aria-valuenow="88"
+                            <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ articulos_medicina }}%" aria-valuenow="88"
                             aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="wrapper mt-4">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-gray">Alimentos</p>
-                            <p class="mb-2 text-dark"> {{propAlimentos}}%</p>
+                            <p class="mb-2 text-dark"> {{articulos_alimentacion}}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{propAlimentos}}%" aria-valuenow="56"
+                            <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{articulos_alimentacion}}%" aria-valuenow="56"
                             aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="wrapper mt-4">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-gray">Artículos de Rescate</p>
-                            <p class="mb-2 text-warning">{{propArticuloRescate}}%</p>
+                            <p class="mb-2 text-warning">{{articulos_rescate}}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{propArticuloRescate}}%" aria-valuenow="88"
+                            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{articulos_rescate}}%" aria-valuenow="88"
                             aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="wrapper mt-4">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-gray">Transporte</p>
-                            <p class="mb-2 text-success">{{propTransporte}}%</p>
+                            <p class="mb-2 text-success">{{articulos_transporte}}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{propTransporte}}%" aria-valuenow="56"
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{articulos_transporte}}%" aria-valuenow="56"
                             aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="wrapper mt-4">
                         <div class="d-flex justify-content-between">
                             <p class="mb-2 text-gray">Otros</p>
-                            <p class="mb-2 text-success">{{propOtro}}%</p>
+                            <p class="mb-2 text-success">{{articulos_otros}}%</p>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{propOtro}}%" aria-valuenow="56"
+                            <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{articulos_otros}}%" aria-valuenow="56"
                             aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>                    

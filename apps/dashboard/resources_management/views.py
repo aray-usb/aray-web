@@ -20,39 +20,55 @@ class ResourcesIndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        """
-        if Recurso.objects.filter(tipo=0).count() == 0:
-            cantMedicinas = 0
-        else:
-            cantMedicinas = Recurso.objects.get(tipo=0).cantidad
-        if  Recurso.objects.filter(tipo=1).count() == 0:
-            cantAlimentacion = 0
-        else:
-            cantAlimentacion = Recurso.objects.get(tipo=1).cantidad
-        if Recurso.objects.filter(tipo=2).count() == 0:
-            cantTransporte = 0
-        else:
-            cantTransporte = Recurso.objects.get(tipo=2).cantidad
-        if Recurso.objects.filter(tipo=3).count() == 0:    
-            cantArticuloRescate = 0
-        else:
-            cantArticuloRescate = Recurso.objects.get(tipo=3).cantidad
-        if Recurso.objects.filter(tipo=4).count() == 0:
-            cantOtro = 0
-        else:
-            cantOtro = Recurso.objects.get(tipo=4).cantidad
-        total = cantMedicinas + cantAlimentacion + cantTransporte + cantArticuloRescate + cantOtro
-        print(total)
-        """
-        context["recursos"] =  Recurso.objects.all()
-        """
-        context['propMedicinas'] = str((cantMedicinas * 100) / total)
-        context['propAlimentos'] = str((cantAlimentacion * 100) / total)
-        context['propTransporte'] = str((cantTransporte * 100) / total)
-        context['propArticuloRescate'] = str((cantArticuloRescate * 100) / total)
-        context['propOtro'] = str((cantOtro * 100) / total)
-        context['total'] = total
-        """
+
+        context["recursos"] = Recurso.objects.all()
+        context["articulos"] = context["recursos"].count()
+        
+        # Porcentajes de Recursos
+        try:
+            context["articulos_medicina"] = str(
+                (
+                    Recurso.objects.filter(tipo=Recurso.TIPO_MEDICINAS).count() / context["articulos"]
+                ) * 100
+            )
+        except ZeroDivisionError:
+            context["articulos_medicina"] = 0
+
+        try:
+            context["articulos_alimentacion"] = str(
+                (
+                    Recurso.objects.filter(tipo=Recurso.TIPO_ALIMENTACION).count() / context["articulos"]
+                ) * 100
+            )
+        except ZeroDivisionError:
+            context["articulos_alimentacion"] = 0
+
+        try:
+            context["articulos_rescate"] = str(
+                (
+                    Recurso.objects.filter(tipo=Recurso.TIPO_ARTICULO_RESCATE).count() / context["articulos"]
+                ) * 100
+            )
+        except ZeroDivisionError:
+            context["articulos_rescate"] = 0
+        
+        try:
+            context["articulos_transporte"] = str(
+                (
+                    Recurso.objects.filter(tipo=Recurso.TIPO_TRANSPORTE).count() / context["articulos"]
+                ) * 100
+            )
+        except ZeroDivisionError:
+            context["articulos_transporte"] = 0
+
+        try:
+            context["articulos_otros"] = str(
+                (
+                    Recurso.objects.filter(tipo=Recurso.TIPO_OTROS).count() / context["articulos"]
+                ) * 100
+            )
+        except ZeroDivisionError:
+            context["articulos_otros"] = 0
         
         return context
 
