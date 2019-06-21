@@ -2,7 +2,7 @@
 {% load static %}
 {% load widget_tweaks %}
 
-{% block title %}Detalles de la Organización{% endblock %}
+{% block title %}Detalles del Voluntario{% endblock %}
 
 {% block content %}
 
@@ -45,6 +45,8 @@
         <div class="col-8">
             <div class="card" style="border-radius: 20px 20px 20px 20px;-moz-border-radius: 20px 30px 20px 10px;-webkit-border-radius: 20px 20px 20px 20px;">
                 <div class="card-body">
+                    <h3 class="text-aray"> Nombre y Apellido: </h3><h3 class="text-gray"> {{ voluntario.usuario.first_name }} {{ voluntario.usuario.last_name }} </h3><br>
+                    <h3 class="text-aray"> Nombre de Usuario: </h3><h3 class="text-gray"> {{ voluntario.usuario.username     }} </h3><br>
                     <h3 class="text-aray"> Documento de Identidad: </h3><h3 class="text-gray"> {{ voluntario.identificacion }} </h3><br>
                     <h3 class="text-aray"> Email: </h3><h3 class="text-gray"> {{ voluntario.email }} </h3><br>
                     <h3 class="text-aray"> Teléfono: </h3><h3 class="text-gray"> {{ voluntario.telefono }} </h3><br>
