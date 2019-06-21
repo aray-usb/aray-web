@@ -170,7 +170,7 @@ class Voluntario(models.Model):
             return "{0} {1}".format(self.usuario.first_name, self.usuario.last_name)
         else:
             return self.usuario.username
-            
+
 class Tarea(models.Model):
     """
     Representa una tarea asignada a un usuario.

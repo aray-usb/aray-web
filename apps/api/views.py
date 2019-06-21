@@ -147,7 +147,7 @@ class ReporteViewSet(mixins.RetrieveModelMixin,
         if incidencia_id is None or incidencia_id == -1:
             incidencia = Incidencia(
                 nombre="Nueva incidencia por confirmar",
-                descripcion="Pendiente de revisión",
+                descripcion="Pendiente de revision",
                 latitud=decimal.Decimal(request.data['latitud']),
                 longitud=decimal.Decimal(request.data['longitud']),
             )
@@ -235,3 +235,27 @@ class TareaViewSet(mixins.RetrieveModelMixin,
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+        def create(self, request, *args, **kwargs):
+        """
+        Crea una nueva tarea asignada al usuario.
+        """
+
+        try:
+            voluntario = request.user.voluntario
+        except:
+            voluntario = None
+
+
+        tarea = Tarea(
+            titulo=request.data['titulo'],
+            descripcion=request.data['descripcion'],
+            fecha_limite=request.data['fecha_limite'],
+            asignado_a=voluntario,
+            asignado_por=voluntario
+        )
+        tarea.save()
+
+        serializer = self.get_serializer(tarea)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
