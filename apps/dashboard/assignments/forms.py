@@ -3,10 +3,14 @@ from apps.api.models import Tarea
 
 
 class TareaForm(forms.ModelForm):
-    fecha_limite = forms.DateField(widget=forms.TextInput(attrs=
-                                {
-                                    'class':'datepicker'
-                                }))
+
     class Meta:
         model = Tarea
-        fields = '__all__'
+        fields = (
+            'titulo',
+            'descripcion',
+            'fecha_limite',
+            'fecha_de_resolucion',
+            'estado',
+            'asignada_a',
+        )
