@@ -49,11 +49,13 @@ class RegistroView(APIView):
         return Response({"success": False, "content": "No se proporcionaron todos los datos."}, status=400)
 
     usuario_existente = User.objects.filter(email=email) | User.objects.filter(username=username)
+    voluntario_existente = Voluntario.objects.filter(nro_identidad=document)
 
-    if usuario_existente.count() > 0:
+    if usuario_existente.count() > 0 or voluntario_existente.count() > 0:
         return Response({"success": False, "content": "Ya existe un usuario con tus datos"}, status=400)
 
     usuario = User(
+        username=username,
         first_name=first_name,
         last_name=last_name,
         email=email,
