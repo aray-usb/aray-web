@@ -66,6 +66,7 @@ class ReporteViewSet(mixins.RetrieveModelMixin,
             incidencia = Incidencia.objects.get(
                 pk=incidencia_id
             )
+            incidencia.save()
 
         try:
             voluntario = request.user.voluntario
