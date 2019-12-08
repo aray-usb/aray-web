@@ -3,7 +3,7 @@ from django import template
 
 register = template.Library()
 
-@register.filter(name='incidencias_en_curso')
+@register.filter()
 def incidencias_en_curso(val):
     return Incidencia.objects.exclude(
         estado=Incidencia.ESTADO_RECHAZADA
@@ -11,6 +11,10 @@ def incidencias_en_curso(val):
         estado=Incidencia.ESTADO_RESUELTA
     )
 
-@register.filter(name='cantidad_incidencias_en_curso')
+@register.filter()
 def cantidad_incidencias_en_curso(val):
     return incidencias_en_curso(val).count()
+
+@register.filter()
+def hay_incidencias_en_curso(val):
+    return incidencias_en_curso().exists()
