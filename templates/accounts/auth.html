@@ -21,13 +21,6 @@
 
     </head>
     <body id="content" class="layout-full">
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
         <div class="container" id="container">
             <div class="form-container sign-up-container">
                 <form action="#" method="POST">
@@ -49,7 +42,16 @@
                         <img src="{% static 'img/aray-logo.png' %}" width="80" height="80">
                         <h1>Ingreso</h1>
                     </div>
-                    <input type="text" name="username" placeholder="Username" />
+
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="list-style:none;text-align:left;">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <input type="text" name="username" placeholder="Nombre de Usuario" />
                     <input type="password" name="password" placeholder="Contraseña" />
                     <a href="#">¿Olvidaste tu contraseña?</a>
                     <button type="submit" id="login-button" name="login">Ingresa</button>
@@ -58,13 +60,13 @@
             <div class="overlay-container">
                 <div class="overlay">
                     <div class="overlay-panel overlay-left">
-                        <h1>¡Bienvenido de nuevo a Aray!</h1>
-                        <p>Para mantenerte conectado con nosotros por favor introduce tus credenciales</p>
+                        <h1>¡Hola, amigo!</h1>
+                        <p>Por favor, ingresa tus credenciales para comenzar esta experiencia</p>
                         <button class="ghost" id="signIn">Ingreso</button>
                     </div>
                     <div class="overlay-panel overlay-right">
-                        <h1>¡Hola, Amigo!</h1>
-                        <p>Por favor, ingresa credenciales para comenzar esta experienca.</p>
+                        <h1>¡Bienvenido de nuevo a Aray!</h1>
+                        <p>Para mantenerte conectado con nosotros por favor introduce tus credenciales</p>
                         <button class="ghost" id="signUp">Registro</button>
                     </div>
                 </div>
